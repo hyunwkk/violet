@@ -1,0 +1,1 @@
+2021-05-10 22:38:23.300 [INFO ] [com.bteam.violet.persistence.DataSourceTests] [main] [com.bteam.violet.persistence.DataSourceTests.testConnection(DataSourceTests.java:30)] -- HikariProxyConnection@1265053098 wrapping net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@ea9b7c6

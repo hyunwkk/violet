@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CustMapper">
+
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO cust_tbl(cust_bno, cust_name, cust_gender,
+		cust_id, cust_password, cust_address, cust_phone, cust_job, cust_area,
+		cust_religion, cust_smoking, cust_drinking, cust_exer, cust_food, cust_pet,
+		cust_study, cust_hobby, cust_char, cust_photo, cust_say, cust_different)
+		VALUES (seq_cust.nextval,#{cust_name},#{cust_gender},#{cust_id},#{cust_password},#{cust_address},
+		#{cust_phone},#{cust_job},#{cust_area},#{cust_religion},#{cust_smoking},#{cust_drinking},#{cust_exer},
+		#{cust_food},#{cust_pet},#{cust_study},#{cust_hobby},#{cust_char},#{cust_photo},#{cust_say},#{cust_different})	
+	</insert>
+
+
+	 <!-- 로그인 -->
+	<select id="login" resultType="com.bteam.violet.domain.CustVO">
+		<!-- SELECT cust_id, cust_password, cust_different -->
+		SELECT *
+		FROM cust_tbl
+		WHERE cust_id = #{cust_id}
+		<!--  AND cust_password = #{cust_password}--> 
+	</select>
+	
+	
+	 <!-- 전체 회원정보 페이지 리스트-->
+	 <select id="info" resultType="com.bteam.violet.domain.CustVO" parameterType="com.bteam.violet.domain.Criteria">
+	 	SELECT cust_bno, cust_id, cust_password, cust_name, cust_gender, cust_phone, cust_address,
+				cust_joindate, cust_different
+		FROM (select cust_bno, cust_id, cust_password, cust_name, cust_gender, cust_phone, cust_address,
+				cust_joindate, cust_different, row_number() over(order by cust_bno ASC) as rNum from cust_tbl
+				where 1=1
+					<include refid="search"></include>)
+		WHERE rNum BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY cust_bno ASC	 
+	 </select>
+	 
+	 <select id="listCount" parameterType="com.bteam.violet.domain.SearchCriteria" resultType="int">
+	 	SELECT COUNT(cust_bno)
+	 	FROM cust_tbl
+	 	WHERE 1=1
+	 	<include refid="search"></include>
+	 	AND cust_bno > 0
+	 </select>
+	 
+	 <sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">AND cust_id LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND cust_name LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND cust_phone LIKE '%' || #{keyword} || '%'</if>
+		</if>
+	</sql>
+	
+	
+	<!-- 전체회원 정보 조회 -->
+	<!-- <select id="info" resultType="com.bteam.violet.domain.CustVO" parameterType="com.bteam.violet.domain.Criteria">
+		SELECT cust_bno, cust_id, cust_password, cust_name, cust_gender, cust_phone, 
+		cust_address, cust_joindate, cust_different 
+		FROM cust_tbl
+	</select> -->
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="custdelete">
+		DELETE FROM cust_tbl
+		WHERE cust_id = #{cust_id}
+	</delete>
+	
+	<!-- 회원 존재 여부 -->
+	<select id="isCust" parameterType="String" resultType="int">
+		SELECT count(*) FROM cust_tbl
+		WHERE cust_id=#{cust_id}
+	</select>
+	
+	<!-- 탈퇴 테스트 -->
+	<delete id="deletecust" parameterType="String">
+		DELETE cust_tbl WHERE cust_id=#{cust_id}
+	</delete>
+
+	 
+	
+	 
+
+
+</mapper>

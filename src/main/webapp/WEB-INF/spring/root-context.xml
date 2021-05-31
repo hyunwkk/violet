@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	
+	 <context:annotation-config />
+
+<!-- 	 <bean
+		 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		 <property name="locations">
+			 <value>WEB-INF/jdbc.properties</value>
+		 </property>
+	 </bean> -->
+
+<!-- 	 <bean id="dataSource"
+		 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		 <property name="driverClass" value="${jdbc.driverClassName}" />
+		 <property name="url" value="${jdbc.url}" />
+		 <property name="username" value="${jdbc.username}" />
+		 <property name="password" value="${jdbc.password}" />
+	 </bean> -->
+	 <!--/////////////hr계정꺼//////////////////////// -->
+	<!-- <bean id="dataSource"
+		 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		 <property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		 <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		 <property name="username" value="hr" />
+		 <property name="password" value="hr" />
+	 </bean>
+	   
+
+  
+	 <bean id="transactionManager"
+		 class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		 <property name="dataSource" ref="dataSource" />
+
+	 </bean>
+
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		 <property name="dataSource" ref="dataSource" />
+		 <property name="typeAliasesPackage" value="com.javateam.myBatisSample.domain" />
+		 <property name="mapperLocations" value="classpath:mapper/*.xml" />
+	 </bean>
+
+	 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	 </bean> -->
+	 
+	 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+	 
+	 <!-- DBCP -->
+ 	<!-- <bean id="dataSourceDBCP"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close" 
+		p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:xe" 
+		p:username="violet"
+		p:password="violet" 
+		p:maxTotal="10" 
+		p:maxIdle="5" 
+		p:maxWaitMillis="-1" /> -->
+
+
+	 <!--  HikariCP configuration-->
+	<bean id="hikariDBCP" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+	
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property> 
+			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+
+		<!-- <property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property> -->
+
+		<property name="username" value="violet"></property>
+		<property name="password" value="violet"></property>
+	</bean>
+	
+  	 <bean id="dataSource"
+	 class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		 <property name="driverClass" value="oracle.jdbc.OracleDriver" />
+		 <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		 <property name="username" value="violet" />
+		 <property name="password" value="violet" />
+	 </bean>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="hikariDBCP"></property>
+		<property name="mapperLocations" value="classpath:com/bteam/violet/mapper/*.xml" />
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	 </bean>
+	
+	<mybatis-spring:scan base-package="com.bteam.violet.mapper" />
+	
+
+	<context:component-scan base-package="com.bteam.violet.login" />
+	<context:component-scan base-package="com.bteam.violet.service" />
+	<context:component-scan base-package="com.bteam.violet.dao" />
+		
+</beans>
