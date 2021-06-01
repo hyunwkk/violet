@@ -18,11 +18,10 @@
 
 	 <!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="com.bteam.violet.domain.CustVO">
-		<!-- SELECT cust_id, cust_password, cust_different -->
 		SELECT *
 		FROM cust_tbl
 		WHERE cust_id = #{cust_id}
-		<!--  AND cust_password = #{cust_password}--> 
+
 	</select>
 	
 	
@@ -54,19 +53,11 @@
 		</if>
 	</sql>
 	
-	
-	<!-- 전체회원 정보 조회 -->
-	<!-- <select id="info" resultType="com.bteam.violet.domain.CustVO" parameterType="com.bteam.violet.domain.Criteria">
-		SELECT cust_bno, cust_id, cust_password, cust_name, cust_gender, cust_phone, 
-		cust_address, cust_joindate, cust_different 
-		FROM cust_tbl
-	</select> -->
-	
 	<!-- 회원 탈퇴 -->
-	<delete id="custdelete">
+<!-- 	<delete id="custdelete">
 		DELETE FROM cust_tbl
 		WHERE cust_id = #{cust_id}
-	</delete>
+	</delete> -->
 	
 	<!-- 회원 존재 여부 -->
 	<select id="isCust" parameterType="String" resultType="int">
@@ -74,7 +65,7 @@
 		WHERE cust_id=#{cust_id}
 	</select>
 	
-	<!-- 탈퇴 테스트 -->
+	<!-- 관리자 회원탈퇴 -->
 	<delete id="deletecust" parameterType="String">
 		DELETE cust_tbl WHERE cust_id=#{cust_id}
 	</delete>

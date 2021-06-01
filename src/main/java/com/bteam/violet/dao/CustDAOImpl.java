@@ -25,7 +25,6 @@ public class CustDAOImpl implements CustDAO{
 	// 로그인
 	@Override
 	public CustVO login(CustVO custVO) throws Exception {
-		//return sql.selectOne("CustMapper.login", custVO);
 		return sql.selectOne("CustMapper.login", custVO.getCust_id());
 	}
 
