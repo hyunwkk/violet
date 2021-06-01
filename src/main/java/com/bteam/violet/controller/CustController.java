@@ -59,7 +59,7 @@ public class CustController {
 		
 		HttpSession session = req.getSession();
 		CustVO login = custService.login(custVO);
-		logger.info("post loging");
+		logger.info("post loging : " + login);
 		
 		
 		if(login == null) {
@@ -68,6 +68,7 @@ public class CustController {
 			rttr.addFlashAttribute("msg",false);
 		}else {
 			logger.info("session id :" + session.getId());
+			
 			if(login.getCust_different()== 1) {
 				logger.info("관리자 로그인");
 				session.setAttribute("admin", login);

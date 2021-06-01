@@ -196,7 +196,6 @@ li {list-style: none; float: left; padding: 10px;}
 	<table class="table">
 	    <thead class="thead-dark">
 	      <tr>
-	      	<!-- <th>번호</th> -->
 	        <th>아이디</th>
 			<th>비밀번호</th>
 			<th>이름</th>
@@ -210,7 +209,6 @@ li {list-style: none; float: left; padding: 10px;}
 	    </thead>
 	    <c:forEach var="info" items="${custlist}" varStatus="st">
 	    <tr>
-	    	<%-- <th>${info.cust_bno}</th> --%>
 	        <th>${info.cust_id}</th>
 			<th>${info.cust_password}</th>
 			<th>${info.cust_name}</th>
@@ -219,7 +217,6 @@ li {list-style: none; float: left; padding: 10px;}
 			<th>${info.cust_address}</th>
 			<th><fmt:formatDate pattern="yyyy-MM-dd" value="${info.cust_joindate}" /></th>
 			<th>${info.cust_different}</th>
-			<%-- <th><input type="button" value="삭제" data-cust ="${info.cust_id}" class="delete1" /></th> --%>
 			<th class="delete"><a href="${rootPath}/admin/delete_proc.do?key=${info.cust_id}">삭제</a></th>
 	    </tr>
 	    </c:forEach>   
@@ -245,8 +242,12 @@ li {list-style: none; float: left; padding: 10px;}
 	 
 	<script>	 
  	 $(".delete").on("click",function(){
- 		  if (confirm("정말 삭제하시겠습니까?")){			  
- 		  }		 
+ 		  if (confirm("정말 삭제하시겠습니까?" )){
+ 			alert("회원 삭제 완료!");  
+ 		   }else {
+ 			alert("취소하였습니다.");
+ 			  return false;
+ 		  }
 	 });
 	</script>  	
 

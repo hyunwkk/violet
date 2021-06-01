@@ -14,8 +14,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
 public class HandlerChat extends TextWebSocketHandler {
-	
-	
 
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	private static Logger logger = LoggerFactory.getLogger(HandlerChat.class);

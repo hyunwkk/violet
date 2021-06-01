@@ -26,14 +26,14 @@
 	<context:component-scan base-package="com.bteam.violet.controller" />
 	<context:component-scan base-package="com.bteam.violet.chat" />
 
-	<!-- <beans:bean id="AdminInterceptor" class="com.bteam.violet.interceptor.AdminInterceptor"></beans:bean>
+	<beans:bean id="AdminInterceptor" class="com.bteam.violet.interceptor.AdminInterceptor"></beans:bean>
 
 	<interceptors>
 	 <interceptor>
 	  <mapping path="/admin/**" />
 	  <beans:ref bean="AdminInterceptor" />
 	 </interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 	<beans:bean id="handlerChat" class="com.bteam.violet.chat.HandlerChat"></beans:bean>
 
