@@ -61,5 +61,9 @@ public class AdminController {
 	}
 	
 	
+	@GetMapping("/header")
+	public void header() {
+		
+	}
 
 }

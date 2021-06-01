@@ -2,119 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@include file="../includes/headerbar.jsp" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <style type="text/css">
-body {
-	font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-	height: 100%;
-	width: 0;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	right: 0;
-	background-color: #C0C0C0;
-	overflow-x: hidden;
-	transition: 0.5s;
-	/* padding-top: 60px; */
-}
-
-.sidenav a {
-	padding: 8px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 25px;
-	color: #818181;
-	display: block;
-	transition: 0.3s;
-}
-
-.sidenav a:hover {
-	color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	font-size: 36px;
-	margin-left: 50px;
-}
-.nav_bar {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	
-	
-}
-.header {
-	background:#808080;
-	width:100%;
-	height:100px;
-	display:flex;
-	<!--opacity: 0.01;-->
-}
-
-.nav .mainlogo{
-	margin-top:20px;
-	margin-left:50px;
-	padding-bottom:20px;
-	font-size:40px;
-	height:30px;
-	
-}
-
-.mainlogo-link {
-	text-decoration:none;
-	color:white;
-}
-
-.mainlogo a:hover {
-	text-decoration:none;
-	color:white;
-}
-
-.nav .nav_bar{
-	margin-right:40px;
-	margin-top:25px;
-	color:white;
-}
-
-
-@media screen and (max-height: 450px) {
-	.sidenav {
-		padding-top: 15px;
-	}
-	.sidenav a {
-		font-size: 18px;
-	}
-}
-
-.mySidenav {
-	z-index=10;
-}
-
-.main-image {
-	width:100%;
-	z-index:-1;
-
-}
-
-.home-p{
-	padding-bottom:20px;
-	right:43%;
-	bottom:15%;
-	position:absolute;
-	z-index:1;
-	font-size:25px;
-	line-height:-5px;
-	text-align:center;
-	color:white;
-}
 
 li {list-style: none; float: left; padding: 10px;}
 
@@ -130,7 +23,7 @@ li {list-style: none; float: left; padding: 10px;}
 
 
 </style>
-  <title>전체회원정보 조회!</title>
+  <title>전체 회원정보 조회</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -154,24 +47,6 @@ li {list-style: none; float: left; padding: 10px;}
  
 </head>
 <body>
-	<div class="header">
-		<div class="nav">
-			<h2 class="mainlogo"><a class="mainlogo-link" href="/violet">violet</a></h2>
-			<div id="mySidenav" class="sidenav">
-		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		  <a href="${rootPath}/cust/login">login</a>
-		  <a href="#">mypage</a>
-		  <a href="#">story</a>
-		  <a href="#">chatting</a>
-		  <a href="search/searchmain">search</a>
-		  <a href="#">profile</a>
-		  <a href="${rootPath}/notice/list">service</a>
-			</div>
-			<span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>
-		</div>	
-	</div>
-	
-
 	<div class="container">
 	<h3>전체회원 정보 조회</h3>
 	<div class="search">

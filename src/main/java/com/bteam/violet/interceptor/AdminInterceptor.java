@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 public class AdminInterceptor extends HandlerInterceptorAdapter{
 
 	
@@ -14,6 +16,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 				
 		try {
 			if(req.getSession().getAttribute("admin") == null) {
+				log.info("비회원 이거나 관리자가 아닙니다. 홈페이지로 이동합니다.");
 				res.sendRedirect("/violet/");
 				return false;
 			}

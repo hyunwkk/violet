@@ -28,8 +28,7 @@ public class NoticeController {
 		log.info("list");
 		
 		model.addAttribute("list", service.getList());
-		//테스트 코드
-		//model.addAttribute("count", service.getHit());
+
 	}
 	
 	@GetMapping("/register")
@@ -62,7 +61,6 @@ public class NoticeController {
 		log.info("modify: " + notice);
 		
 		if(service.modify(notice)) {
-			//System.out.println("넘어온값" + service.modify(notice));
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/notice/list";
