@@ -53,13 +53,39 @@ public class CustServiceImpl implements CustService{
 	}
 
 	
-	
-	// 탈퇴 테스트
+
+	// 관리자 회원 탈퇴
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public void deletecust(String cust_id){
 		custDAO.deletecust(cust_id);
 		
+	}
+	
+	//아이디 중복체크
+	@Override
+	public int idChk(CustVO custVO) throws Exception {
+		int result = custDAO.idChk(custVO);
+		return result;
+	}
+	
+	//프로필 설정
+	@Override
+	public void profile(CustVO custVO) throws Exception {
+		custDAO.profile(custVO);
+	}
+	
+
+	//회원 정보 수정
+	@Override
+	public void custUpdate(CustVO custVO) throws Exception {
+		custDAO.custUpdate(custVO);
+	}
+	
+	//회원 탈퇴
+	@Override
+	public void custDelete(CustVO custVO) throws Exception {
+		custDAO.custDelete(custVO);
 	}
 	
 	

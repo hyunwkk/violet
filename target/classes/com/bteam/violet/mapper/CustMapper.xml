@@ -6,14 +6,28 @@
 
 	<!-- 회원가입 -->
 	<insert id="register">
-		INSERT INTO cust_tbl(cust_bno, cust_name, cust_gender,
-		cust_id, cust_password, cust_address, cust_phone, cust_job, cust_area,
-		cust_religion, cust_smoking, cust_drinking, cust_exer, cust_food, cust_pet,
-		cust_study, cust_hobby, cust_char, cust_photo, cust_say, cust_different)
-		VALUES (seq_cust.nextval,#{cust_name},#{cust_gender},#{cust_id},#{cust_password},#{cust_address},
-		#{cust_phone},#{cust_job},#{cust_area},#{cust_religion},#{cust_smoking},#{cust_drinking},#{cust_exer},
-		#{cust_food},#{cust_pet},#{cust_study},#{cust_hobby},#{cust_char},#{cust_photo},#{cust_say},#{cust_different})	
+		INSERT INTO cust_tbl(
+		cust_name, cust_gender, cust_birth,cust_email,
+		cust_id, cust_password, cust_address, cust_phone, cust_different)
+		VALUES (
+		#{cust_name},#{cust_gender},#{cust_birth},#{cust_email},#{cust_id},#{cust_password},
+		#{cust_address},#{cust_phone},#{cust_different})	
 	</insert>
+	
+	<!-- 프로필 -->
+	<insert id="profile">
+		INSERT INTO cust_tbl(cust_job, cust_area,
+		cust_religion, cust_smoking, cust_drinking, cust_exer, cust_food, cust_pet,
+		cust_study, cust_hobby, cust_char, cust_photo, cust_say)
+		VALUES (#{cust_job},#{cust_area},#{cust_religion},#{cust_smoking},#{cust_drinking},#{cust_exer},
+		#{cust_food},#{cust_pet},#{cust_study},#{cust_hobby},#{cust_char},#{cust_photo},#{cust_say})	
+	</insert>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM cust_tbl
+		WHERE cust_id = #{cust_id}	
+	</select>
 
 
 	 <!-- 로그인 -->
@@ -53,11 +67,6 @@
 		</if>
 	</sql>
 	
-	<!-- 회원 탈퇴 -->
-<!-- 	<delete id="custdelete">
-		DELETE FROM cust_tbl
-		WHERE cust_id = #{cust_id}
-	</delete> -->
 	
 	<!-- 회원 존재 여부 -->
 	<select id="isCust" parameterType="String" resultType="int">
@@ -69,7 +78,24 @@
 	<delete id="deletecust" parameterType="String">
 		DELETE cust_tbl WHERE cust_id=#{cust_id}
 	</delete>
-
+	
+	<!-- 회원정보 수정 -->
+	<update id="custUpdate">
+		UPDATE cust_tbl SET 
+		cust_password = #{cust_password},
+		cust_name = #{cust_name},
+		cust_address = #{cust_address},
+		cust_phone = #{cust_phone}
+		cust_email = #{cust_email}
+		WHERE cust_id = #{cust_id}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="custDelete">
+		DELETE FROM cust_tbl
+		WHERE cust_id = #{cust_id}
+		  AND cust_password = #{cust_password} 
+	</delete>
 	 
 	
 	 
