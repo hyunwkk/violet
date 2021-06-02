@@ -23,7 +23,19 @@ public interface CustDAO {
 	// 회원 존재 여부
 	boolean isCust(String cust_id);
 	
-	// 회원 탈퇴
+	//관리자 회원 탈퇴
 	public void deletecust(String cust_id);
+	
+	// 프로필 설정
+	public void profile(CustVO custVO) throws Exception;
+	
+	// 아이디 중복 체크
+	public int idChk(CustVO custVO) throws Exception;
+
+	// 회원정보 수정
+	public void custUpdate(CustVO custVO)throws Exception;
+
+	// 회원 탈퇴
+	public void custDelete(CustVO custVO)throws Exception;
 
 }

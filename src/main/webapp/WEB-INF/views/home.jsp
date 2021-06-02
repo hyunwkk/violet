@@ -45,11 +45,15 @@
 		<div>
 			<p>${member.cust_id}님 환영 합니다.</p>
 			<button id="logoutBtn" type="button">로그아웃</button>
+			<button id="custUpdateBtn" type="button"
+						onclick="location.href='./cust/mypage'">회원정보수정</button>
 		</div>
 	</c:if>
 	
 	<c:if test="${admin.cust_different == 1}">
 		<button id="adminpage" type="button">관리자 페이지</button>
+		<button id="custUpdateBtn" type="button"
+						onclick="location.href='./cust/mypage'">회원정보수정</button>
 	</c:if>
 			
 		

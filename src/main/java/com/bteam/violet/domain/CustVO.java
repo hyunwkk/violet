@@ -6,7 +6,7 @@ public class CustVO {
 	
 	private int cust_bno;
 	private String cust_name;
-	//private Date cust_birth;
+	private String cust_birth;
 	private String cust_gender;
 	private String cust_id;
 	private String cust_password;
@@ -27,10 +27,17 @@ public class CustVO {
 	private String cust_say;
 	private Date cust_joindate;
 	private int cust_different;
+	private	String cust_email;
 	
 	
 	
 	
+	public String getCust_email() {
+		return cust_email;
+	}
+	public void setCust_email(String cust_email) {
+		this.cust_email = cust_email;
+	}
 	public int getCust_bno() {
 		return cust_bno;
 	}
@@ -43,12 +50,13 @@ public class CustVO {
 	public void setCust_name(String cust_name) {
 		this.cust_name = cust_name;
 	}
-	//public Date getCust_birth() {
-	//	return cust_birth;
-	//}
-	//public void setCust_birth(Date cust_birth) {
-	//	this.cust_birth = cust_birth;
-	//}
+	
+	public String getCust_birth() {
+		return cust_birth;
+	}
+	public void setCust_birth(String cust_birth) {
+		this.cust_birth = cust_birth;
+	}
 	public String getCust_gender() {
 		return cust_gender;
 	}
@@ -174,6 +182,46 @@ public class CustVO {
 	
 	@Override
 	public String toString() {
+		return "CustVO [cust_bno=" + cust_bno + ", cust_name=" + cust_name + ", cust_birth=" + cust_birth
+				+ ", cust_gender=" + cust_gender + ", cust_id=" + cust_id + ", cust_password=" + cust_password
+				+ ", cust_address=" + cust_address + ", cust_phone=" + cust_phone + ", cust_job=" + cust_job
+				+ ", cust_area=" + cust_area + ", cust_religion=" + cust_religion + ", cust_smoking=" + cust_smoking
+				+ ", cust_drinking=" + cust_drinking + ", cust_exer=" + cust_exer + ", cust_food=" + cust_food
+				+ ", cust_pet=" + cust_pet + ", cust_study=" + cust_study + ", cust_hobby=" + cust_hobby
+				+ ", cust_char=" + cust_char + ", cust_photo=" + cust_photo + ", cust_say=" + cust_say
+				+ ", cust_joindate=" + cust_joindate + ", cust_different=" + cust_different + ", cust_email="
+				+ cust_email + "]";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/*@Override
+	public String toString() {
+		return "CustVO [cust_bno=" + cust_bno + ", cust_name=" + cust_name + ", cust_birth=" + cust_birth
+				+ ", cust_gender=" + cust_gender + ", cust_id=" + cust_id + ", cust_password=" + cust_password
+				+ ", cust_address=" + cust_address + ", cust_phone=" + cust_phone + ", cust_job=" + cust_job
+				+ ", cust_area=" + cust_area + ", cust_religion=" + cust_religion + ", cust_smoking=" + cust_smoking
+				+ ", cust_drinking=" + cust_drinking + ", cust_exer=" + cust_exer + ", cust_food=" + cust_food
+				+ ", cust_pet=" + cust_pet + ", cust_study=" + cust_study + ", cust_hobby=" + cust_hobby
+				+ ", cust_char=" + cust_char + ", cust_photo=" + cust_photo + ", cust_say=" + cust_say
+				+ ", cust_joindate=" + cust_joindate + ", cust_different=" + cust_different + "]";
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*@Override
+	public String toString() {
 		return "CustVO [cust_bno=" + cust_bno + ", cust_name=" + cust_name + ", cust_gender=" + cust_gender
 				+ ", cust_id=" + cust_id + ", cust_password=" + cust_password + ", cust_address=" + cust_address
 				+ ", cust_phone=" + cust_phone + ", cust_job=" + cust_job + ", cust_area=" + cust_area
@@ -182,7 +230,7 @@ public class CustVO {
 				+ ", cust_study=" + cust_study + ", cust_hobby=" + cust_hobby + ", cust_char=" + cust_char
 				+ ", cust_photo=" + cust_photo + ", cust_say=" + cust_say + ", cust_joindate=" + cust_joindate
 				+ ", cust_different=" + cust_different + "]";
-	}
+	}*/
 	
 	
 	

@@ -47,11 +47,39 @@ public class CustDAOImpl implements CustDAO{
 	}
 
 	
-	// 회원 탈퇴
+	// 관리자 회원 탈퇴
 	@Override
 	public void deletecust(String cust_id) {
 		sql.delete("CustMapper.deletecust", cust_id);
 		
+	}
+	
+	//아이디 중복체크
+	@Override
+	public int idChk(CustVO custVO) throws Exception {
+		int result = sql.selectOne("CustMapper.idChk", custVO);
+		return result;
+	}
+
+	
+	//프로필설정
+	@Override
+	public void profile(CustVO custVO) throws Exception {
+		sql.insert("CustMapper.profile", custVO);
+	}
+		
+	
+	
+	//회원 정보 수정
+	@Override
+	public void custUpdate(CustVO custVO) throws Exception {
+		sql.update("CustMapper.custUpdate", custVO); 
+	}
+	
+	//회원 탈퇴
+	@Override
+	public void custDelete(CustVO custVO) throws Exception {
+		sql.delete("CustMapper.custDelete", custVO);
 	}
 
 	
