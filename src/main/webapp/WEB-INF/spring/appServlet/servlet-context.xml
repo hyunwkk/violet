@@ -40,7 +40,7 @@
 	 
 	 <interceptor>
 	  <mapping path="/cust/delete" />
-	  <mapping path="/cust/mypage" />
+<!-- 	  <mapping path="/cust/mypage" /> -->
 	  <mapping path="/cust/profile" />
 	  <mapping path="/email/write.do" />
 	  <mapping path="/email/send.do" />

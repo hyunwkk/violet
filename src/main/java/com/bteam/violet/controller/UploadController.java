@@ -60,7 +60,7 @@ public class UploadController {
 	
 		
 	List<AttachFileDTO> list = new ArrayList<>();
-	String uploadFolder = "A:\\hyunwkk\\upload\\temp";
+	String uploadFolder = "C:\\upload";
 	
 	String uploadFolderPath = getFolder();
 	// make folder --------
@@ -146,7 +146,7 @@ public class UploadController {
 		
 		log.info("fileName: " + fileName);
 
-		File file = new File("A:\\hyunwkk\\upload\\temp\\" + fileName);
+		File file = new File("C:\\upload\\" + fileName);
 
 		log.info("file: " + file);
 
@@ -173,7 +173,7 @@ public class UploadController {
 		File file;
 
 		try {
-			file = new File("A:\\hyunwkk\\upload\\temp\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("C:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
 
 			file.delete();
 

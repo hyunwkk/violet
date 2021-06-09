@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,9 @@ public class CustController {
 	
 	@Inject
 	CustService custService;
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 	
 	// 아이디 중복체크
 	@ResponseBody
@@ -82,6 +86,10 @@ public class CustController {
 			if(result == 1) {
 				return "/cust/register";
 			}else if(result == 0) {
+				String inputPass = custVO.getCust_password();
+				String pwd = pwdEncoder.encode(inputPass);
+				custVO.setCust_password(pwd);
+				
 				custService.register(custVO);
 			}
 			// 입력한 아이디 존재시 다시 회원가입페이지로
@@ -105,26 +113,21 @@ public class CustController {
 		
 		HttpSession session = req.getSession();
 		CustVO login = custService.login(custVO);
+		boolean pwdMatch = pwdEncoder.matches(custVO.getCust_password(), login.getCust_password());
 		logger.info("post loging : " + login);
 		
 		
-		if(login == null) {
-			logger.info("login fail...");
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg",false);
-		}else {
-			logger.info("session id :" + session.getId());
-			
-			if(login.getCust_different()== 1) {
-				logger.info("관리자 로그인");
-				session.setAttribute("admin", login);
-			}else {
-				logger.info("일반회원 로그인");
-				session.setAttribute("member", login);
-			}
-			
+		if(login.getCust_different()== 0 && pwdMatch == true) {
+			logger.info("일반회원 로그인");
+			session.setAttribute("member", login);
+		} else if(login.getCust_different()== 1 && pwdMatch == true) {
+			logger.info("관리자 로그인");
+			session.setAttribute("admin", login);
 		}
-
+		else {
+			session.setAttribute("member", null);
+			rttr.addFlashAttribute("msg", false);
+		}
 		return "redirect:/";
 		
 	}
@@ -136,6 +139,7 @@ public class CustController {
 		logger.info("logout ok!");
 		return "redirect:/";
 	}
+
 	
 	//회원정보수정 get
 	@RequestMapping(value="/mypage", method = RequestMethod.GET)
@@ -150,6 +154,7 @@ public class CustController {
 		logger.info("수정중");
 		custService.custUpdate(custVO);
 		logger.info("회원정보 수정 : " + custVO);
+		session.invalidate();
 		return "redirect:/";
 	}
 	
@@ -164,7 +169,7 @@ public class CustController {
 		@RequestMapping(value="/custDelete")
 		public String custDelete(CustVO custVO, HttpSession session, RedirectAttributes rttr) throws Exception{
 			
-			CustVO member = (CustVO) session.getAttribute("member");
+/*			CustVO member = (CustVO) session.getAttribute("member");
 			String sessionPassword = member.getCust_password();
 			String voPassword = custVO.getCust_password();
 			
@@ -172,11 +177,23 @@ public class CustController {
 				rttr.addFlashAttribute("msg", false);
 				return "redirect:/cust/delete";
 			}
-			logger.info("고객님이 회원탈퇴 하였습니다.");
+			logger.info("고객님이 회원탈퇴 하였습니다.");*/
 			custService.custDelete(custVO);
 			session.invalidate();
 			return "redirect:/";
 		}
+		
+		// 패스워드 체크
+		@ResponseBody
+		@RequestMapping(value="/passChk", method = RequestMethod.POST)
+		public boolean passChk(CustVO custVO) throws Exception{
+			System.out.println("패스워드 체크하고있니?");
+			CustVO login = custService.login(custVO);
+			boolean pwdChk = pwdEncoder.matches(custVO.getCust_password(), login.getCust_password());
+			System.out.println("패스워드 체크중" + pwdChk);
+			return pwdChk;
+		}
+		
 		
 		// 프로필 메인
 		@RequestMapping(value="/profile", method = RequestMethod.GET)
@@ -205,7 +222,6 @@ public class CustController {
 			logger.info("profile creating..");
 			custService.profile(params); 
 			
-
 			return "redirect:/";
 		}
 		

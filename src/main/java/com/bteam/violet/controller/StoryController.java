@@ -149,13 +149,13 @@ public class StoryController {
 	    
 	    attachList.forEach(attach -> {
 	      try {
-	        Path file  = Paths.get("A:\\hyunwkk\\upload\\temp\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName());
+	        Path file  = Paths.get("c:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName());
 	        
 	        Files.deleteIfExists(file);
 	        
 	        if(Files.probeContentType(file).startsWith("image")) {
 	        
-	          Path thumbNail = Paths.get("A:\\hyunwkk\\upload\\temp\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName());
+	          Path thumbNail = Paths.get("c:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName());
 	          
 	          Files.delete(thumbNail);
 	        }
