@@ -1,6 +1,7 @@
 package com.bteam.violet.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -64,12 +65,18 @@ public class CustDAOImpl implements CustDAO{
 	
 	//프로필설정
 	@Override
-	public void profile(CustVO custVO) throws Exception {
-		sql.insert("CustMapper.profile", custVO);
+	public void profile(Map<String, Object> params) throws Exception {
+		System.out.println("params_check" + params);
+		sql.update("CustMapper.profile", params);
 	}
 		
-	
-	
+	@Override
+	public CustVO myProfile(String cust_id) throws Exception {
+		System.out.println("프로필 daoimpl");
+		return sql.selectOne("CustMapper.myProfile", cust_id);
+	}
+
+		
 	//회원 정보 수정
 	@Override
 	public void custUpdate(CustVO custVO) throws Exception {
@@ -82,6 +89,9 @@ public class CustDAOImpl implements CustDAO{
 		sql.delete("CustMapper.custDelete", custVO);
 	}
 
+	
+
+	
 	
 
 	

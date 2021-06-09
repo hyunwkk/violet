@@ -1,6 +1,7 @@
 package com.bteam.violet.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class CustVO {
 	
@@ -29,9 +30,45 @@ public class CustVO {
 	private int cust_different;
 	private	String cust_email;
 	
+	//profile 사진 업로드
+    private String uuid;
+    private String uploadPath;
+    private String fileName;
+    private boolean fileType;
+	
+    private List<CustVO> attachList;
 	
 	
-	
+	public List<CustVO> getAttachList() {
+		return attachList;
+	}
+	public void setAttachList(List<CustVO> attachList) {
+		this.attachList = attachList;
+	}
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public String getUploadPath() {
+		return uploadPath;
+	}
+	public void setUploadPath(String uploadPath) {
+		this.uploadPath = uploadPath;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public boolean isFileType() {
+		return fileType;
+	}
+	public void setFileType(boolean fileType) {
+		this.fileType = fileType;
+	}
 	public String getCust_email() {
 		return cust_email;
 	}
@@ -180,7 +217,32 @@ public class CustVO {
 	}
 	
 	
+	
 	@Override
+	public String toString() {
+		return "CustVO [cust_bno=" + cust_bno + ", cust_name=" + cust_name + ", cust_birth=" + cust_birth
+				+ ", cust_gender=" + cust_gender + ", cust_id=" + cust_id + ", cust_password=" + cust_password
+				+ ", cust_address=" + cust_address + ", cust_phone=" + cust_phone + ", cust_job=" + cust_job
+				+ ", cust_area=" + cust_area + ", cust_religion=" + cust_religion + ", cust_smoking=" + cust_smoking
+				+ ", cust_drinking=" + cust_drinking + ", cust_exer=" + cust_exer + ", cust_food=" + cust_food
+				+ ", cust_pet=" + cust_pet + ", cust_study=" + cust_study + ", cust_hobby=" + cust_hobby
+				+ ", cust_char=" + cust_char + ", cust_photo=" + cust_photo + ", cust_say=" + cust_say
+				+ ", cust_joindate=" + cust_joindate + ", cust_different=" + cust_different + ", cust_email="
+				+ cust_email + ", uuid=" + uuid + ", uploadPath=" + uploadPath + ", fileName=" + fileName
+				+ ", fileType=" + fileType + ", attachList=" + attachList + "]";
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+/*	@Override
 	public String toString() {
 		return "CustVO [cust_bno=" + cust_bno + ", cust_name=" + cust_name + ", cust_birth=" + cust_birth
 				+ ", cust_gender=" + cust_gender + ", cust_id=" + cust_id + ", cust_password=" + cust_password
@@ -193,7 +255,7 @@ public class CustVO {
 				+ cust_email + "]";
 	}
 	
-	
+	*/
 	
 	
 	

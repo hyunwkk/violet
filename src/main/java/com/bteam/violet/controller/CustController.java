@@ -1,5 +1,9 @@
 package com.bteam.violet.controller;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -7,23 +11,30 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bteam.violet.domain.CustVO;
 import com.bteam.violet.service.CustService;
 
-//import lombok.extern.log4j.Log4j;
+import jdk.internal.net.http.common.Log;
+
+import lombok.extern.log4j.Log4j;
 
 @Controller
-//@Log4j
+@Log4j
 @RequestMapping("/cust/*")
 public class CustController {
 	
@@ -53,6 +64,13 @@ public class CustController {
 		System.out.println("testing..."+custVO);
 		logger.info("post register");
 		//birth format edit
+		logger.info("=======================================================");
+		
+		if (custVO.getAttachList() != null) {
+			custVO.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
+		logger.info("=======================================================");
 		String temp_birth = custVO.getCust_birth().replaceAll("-", "");
 		
 		custVO.setCust_birth(temp_birth);
@@ -157,6 +175,113 @@ public class CustController {
 			logger.info("고객님이 회원탈퇴 하였습니다.");
 			custService.custDelete(custVO);
 			session.invalidate();
+			return "redirect:/";
+		}
+		
+		// 프로필 메인
+		@RequestMapping(value="/profile", method = RequestMethod.GET)
+		public void profile() {
+			
+		}
+		
+		// 프로필 생성
+		@RequestMapping(value="/profilecreate", method = RequestMethod.GET)
+		public void profilecreate() {
+			
+			logger.info("profile...");
+			
+		}
+		
+		// 프로필 생성 post
+		@RequestMapping(value="/profilecreatepost", method = RequestMethod.POST)
+		public String pprofilecreatepost(@RequestParam Map<String, Object> params, CustVO custVO, HttpSession session) throws Exception {
+			
+			CustVO member = (CustVO) session.getAttribute("member"); // 로그인한 멤버 세션 가져와서 CustVO에 member로 저장
+			logger.info("가져오는 세션값 :" + member);
+			logger.info("id:"+ member.getCust_id());
+			Object id = member.getCust_id(); 
+			params.put("cust_id", id); // params에 id map으로 저장
+			logger.info("들고오는 값 : " + params);
+			logger.info("profile creating..");
+			custService.profile(params); 
+			
+
+			return "redirect:/";
+		}
+		
+		// 프로필 파일 업로드 ajax
+		/*@RequestMapping(value="/profileUploadAjax", method = RequestMethod.POST)
+		public void uploadAjaxPost(MultipartFile[] uploadFile) {
+			
+			logger.info("update ajax post...");
+			
+			String uploadFolder = "A:\\hyunwkk\\upload\\temp";
+			
+			for (MultipartFile multipartFile : uploadFile) {
+				
+				logger.info("--------------------------");
+				logger.info("Upload File Name: " + multipartFile.getOriginalFilename());
+				logger.info("Upload File Size: " +  multipartFile.getSize());
+				
+				String uploadFileName = multipartFile.getOriginalFilename();
+				
+				// IE has file path
+				uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+				
+				logger.info("only file name: " + uploadFileName);
+				
+				File saveFile = new File(uploadFolder, uploadFileName);
+				
+				try {
+					
+					multipartFile.transferTo(saveFile);
+					
+				}catch(Exception e) {
+					logger.error(e.getMessage());
+				}// catch
+			}// for
+		}*/
+		
+		//프로필 보기
+		@RequestMapping(value="/myprofile", method = RequestMethod.GET)
+		public String myProfile(CustVO custVO, Model model, HttpSession session) throws Exception {
+			logger.info("my profile!");
+			CustVO member = (CustVO) session.getAttribute("member");
+			model.addAttribute("profile", custService.myProfile(member.getCust_id()));
+			logger.info("my profile! :" + custService.myProfile(member.getCust_id()));
+			return "cust/myprofile";
+		}
+		
+		// 아이디로 첨부파일과 관련된 데이터 json 반환
+		@GetMapping(value="/getAttachList",
+				produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<CustVO>> getAttachList(String cust_id) {
+			log.info("getAttachList : "  + cust_id);
+			
+			return new ResponseEntity<>(custService.getAttachList(cust_id), HttpStatus.OK);
+		}
+		
+		
+		//프로필 수정
+		@RequestMapping(value="/profileupdate", method = RequestMethod.GET)
+		public void profileupdate() {
+			
+		}
+		
+		@RequestMapping(value="/profileupdatepost", method = RequestMethod.POST)
+		public String pprofileupdatepost(@RequestParam Map<String, Object> params, CustVO custVO, HttpSession session) throws Exception {
+			
+			CustVO member = (CustVO) session.getAttribute("member"); // 로그인한 멤버 세션 가져와서 CustVO에 member로 저장
+			logger.info("가져오는 세션값 :" + member);
+			logger.info("id:"+ member.getCust_id());
+			Object id = member.getCust_id(); 
+			params.put("cust_id", id); // params에 id map으로 저장
+			logger.info("들고오는 값 : " + params);
+			logger.info("profile update..");
+			custService.profile(params); 
+			
+
 			return "redirect:/";
 		}
 
