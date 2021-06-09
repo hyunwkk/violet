@@ -85,7 +85,8 @@ li {list-style: none; float: left; padding: 10px;}
 	    <c:forEach var="info" items="${custlist}" varStatus="st">
 	    <tr>
 	        <th>${info.cust_id}</th>
-			<th>${info.cust_password}</th>
+			<%-- <th>${info.cust_password}</th> --%>
+			<th>*******</th>
 			<th>${info.cust_name}</th>
 			<th>${info.cust_gender}</th>
 			<th>${info.cust_phone}</th>

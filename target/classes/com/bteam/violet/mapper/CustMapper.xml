@@ -39,6 +39,14 @@
 		SELECT COUNT(*) FROM cust_tbl
 		WHERE cust_id = #{cust_id}	
 	</select>
+	
+	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+	SELECT COUNT(*) 
+	FROM cust_tbl
+	WHERE cust_id = #{cust_id}
+	AND cust_password = #{cust_password} 
+	</select>
 
 
 	 <!-- 로그인 -->
@@ -93,7 +101,7 @@
 	<!-- 회원정보 수정 -->
 	<update id="custUpdate">
 		UPDATE cust_tbl SET 
-		cust_password = #{cust_password},
+<!-- 		cust_password = #{cust_password}, -->
 		cust_name = #{cust_name},
 		cust_address = #{cust_address},
 		cust_phone = #{cust_phone},
@@ -105,7 +113,7 @@
 	<delete id="custDelete">
 		DELETE FROM cust_tbl
 		WHERE cust_id = #{cust_id}
-		  AND cust_password = #{cust_password} 
+<!-- 		  AND cust_password = #{cust_password}  -->
 	</delete>
 	 
 	 

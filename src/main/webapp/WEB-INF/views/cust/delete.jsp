@@ -16,7 +16,7 @@
 		// 취소
 		$(".cencle").on("click", function() {
 
-			location.href = "/";
+			location.href = "/violet";
 
 		})
 
@@ -27,14 +27,31 @@
 				return false;
 			}
 			
-			alert("탈퇴가 완료되었습니다.");
+			$.ajax({
+				url: "/violet/cust/passChk",
+				type: "POST",
+				dataType: "json",
+				data: $("#deleteForm").serializeArray(),
+				success: function(data){
+					if(data==true){
+						if(confirm("회원탈퇴를 하시겠습니까?")){
+							$("#deleteForm").submit();
+						}
+					}else{
+						alert("패스워드가 일치하지않습니다.");
+						return;
+					}
+				}
+			})
+			
+			/* alert("탈퇴가 완료되었습니다."); */
 		});
 
 	})
 </script>
 <body>
 	<section id="container">
-		<form action="/violet/cust/custDelete" method="post">
+		<form id="deleteForm" action="/violet/cust/custDelete" method="post">
 			<div class="form-group has-feedback">
 				<label class="control-label" for="cust_id">아이디</label> 
 				<input class="form-control" type="text" id="cust_id" name="cust_id" value="${member.cust_id}" readonly="readonly" />
@@ -47,11 +64,12 @@
 				<label class="control-label" for="cust_name">성명</label> 
 				<input class="form-control" type="text" id="cust_name" name="cust_name" value="${member.cust_name}" readonly="readonly" />
 			</div>
+
+		</form>
 			<div class="form-group has-feedback">
-				<button class="btn btn-success" type="submit" id="del_submit">회원탈퇴</button>
+				<button class="btn btn-success" type="button" id="del_submit">회원탈퇴</button>
 				<button class="cencle btn btn-danger" type="button">취소</button>
 			</div>
-		</form>
 		<div>
 			<c:if test="${msg == false}">
 				비밀번호가 맞지 않습니다.
