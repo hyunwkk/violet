@@ -37,12 +37,44 @@ body {
 	padding: 40px 400px 40px 400px;
 	z-index: 1;
 }
+
+.uploadResult {
+	width: 100%;
+	background-color: gray;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+ .uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 50%;
+} 
+
 </style>
+
+    <!-- Custom CSS -->
+    <link href="<c:url value="/resources/dist/css/sb-admin-2.css"/>" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="<c:url value="/resources/vendor/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		$("#cust_gender").on('click', function(){
+			$('input[name=cust_gender]:checked').val();
+		})
 		
 		// 날짜설정
 		$(".datepicker").datepicker({
@@ -158,12 +190,164 @@ body {
 		
 	}
 </script>
+	
+<script>
+
+$(document).ready(function(e){
+	
+	var formObj = $("form[role='form']");
+	
+	$("button[type='submit']").on("click", function(e){
+		
+		e.preventDefault();
+		
+		console.log("submit clicked");
+		
+		var str = "";
+		
+		$(".uploadResult ul li").each(function(i, obj){
+		      
+		      var jobj = $(obj);
+		      
+		      console.dir(jobj);
+		      
+		      
+		      str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+		      str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+		      str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+		      str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
+		      
+		    });
+		
+		console.log(str);
+	    
+	    formObj.append(str).submit();
+		
+	});
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880; //5MB
+	
+	function checkExtension(fileName, fileSize){
+		
+		if(fileSize >= maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		
+		if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	$("input[type='file']").change(function(e){
+		
+		var formData = new FormData();
+		
+		var inputFile = $("input[name='uploadFile']");
+		
+		var files = inputFile[0].files;
+		
+		for(var i = 0; i < files.length; i++) {
+			
+			if(!checkExtension(files[i].name, files[i].size) ){
+				return false;
+			}
+			formData.append("uploadFile", files[i]);
+			
+		}
+		
+		$.ajax({
+			url: '/violet/uploadAjaxAction',
+			processData: false,
+			contentType: false,data:
+			formData,type: 'POST',
+			dataType:'json',
+				success: function(result){
+					console.log(result);
+					showUploadResult(result); // 업로드 결과 처리 함수
+				}				
+		}); //ajax
+				
+	});
+	
+	function showUploadResult(uploadResultArr) {
+		
+		if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+		
+		var uploadUL = $(".uploadResult ul");
+		
+		var str ="";
+		
+		$(uploadResultArr).each(function(i, obj){
+			
+			if(obj.image){
+				var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/"+obj.uuid +"_"+obj.fileName);
+				str += "<li data-path='"+obj.uploadPath+"'";
+				str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+				str +" ><div>";
+				str += "<span> "+ obj.fileName+"</span>";
+				str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+				str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str += "<img src='/violet/display?fileName="+fileCallPath+"'>";
+				str += "</div>";
+				str +"</li>";
+			}else{
+				var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);			      
+			    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+			      
+				str += "<li "
+				str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
+				str += "<span> "+ obj.fileName+"</span>";
+				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
+				str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str += "<img src='/resources/img/attach.png'></a>";
+				str += "</div>";
+				str +"</li>";
+			}
+			
+		});
+		
+		uploadUL.append(str);
+	}
+	
+	$(".uploadResult").on("click", "button", function(e){
+	    
+	    console.log("delete file");
+	      
+	    var targetFile = $(this).data("file");
+	    var type = $(this).data("type");
+	    
+	    var targetLi = $(this).closest("li");
+	    
+	    $.ajax({
+	      url: '/violet/deleteFile',
+	      data: {fileName: targetFile, type:type},
+	      dataType:'text',
+	      type: 'POST',
+	        success: function(result){
+	           alert(result);
+	           
+	           targetLi.remove();
+	         }
+	    }); //$.ajax
+	   });
+	
+	
+	
+});
+	
+	
+
+</script>
 <body>
 	<h2 class="mainlogo">
 		<a class="mainlogo-link" href="/violet">violet</a>
 	</h2>
 	<section id="container">
-		<form action="/violet/cust/custReg" method="post" id="regForm">
+		<form role="form" action="/violet/cust/custReg" method="post" id="regForm">
 			<div class="form-group has-feedback">
 				<label class="control-label" for="cust_id">아이디</label> 
 				<input class="form-control" type="text" id="cust_id" name="cust_id" maxlength="20" pattern="^([a-z0-9_]){7,20}$" placeholder="영문/숫자 조합하여 8~20자로 입력" required/>
@@ -183,8 +367,8 @@ body {
 			</div>
 			<div class="form-group has-feedback">
 				<label class="control-label" for="cust_gender">성별</label><br>
-				<input type="radio" id="cust_gender" name="cust_gender" value="1" />남자
-				<input type="radio" id="cust_gender" name="cust_gender" value="2" />여자
+				<input type="radio" id="cust_gender" name="cust_gender" value="남자" />남자
+				<input type="radio" id="cust_gender" name="cust_gender" value="여자" />여자
 			</div>
 			<div class="form-group has-feedback">
 				<label class="control-label" for="cust_phone">연락처</label> 
@@ -198,6 +382,28 @@ body {
 				<label class="control-label" for="cust_address">주소</label> 
 				<input class="form-control" type="text" id="cust_address" name="cust_address" required/>
 			</div>
+			
+			<div class="row">
+				  <div class="col-lg-12">
+				    <div class="panel panel-default">
+				
+				      <div class="panel-heading">프로필 이미지 등록</div>
+				      <div class="panel-body">
+				        <div class="form-group uploadDiv">
+				            <input type="file" name='uploadFile' multiple="multiple"/>
+				        </div>
+				        
+				        <div class='uploadResult'> 
+				          <ul>
+				          
+				          </ul>
+				        </div>
+				      </div>
+				  
+				    </div>
+				  </div>
+				</div>
+			
 			<input type="hidden" value="0" id="different" name="differnet" />
 
 			<div class="form-group has-feedback">

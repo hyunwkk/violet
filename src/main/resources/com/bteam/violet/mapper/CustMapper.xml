@@ -7,21 +7,32 @@
 	<!-- 회원가입 -->
 	<insert id="register">
 		INSERT INTO cust_tbl(
-		cust_name, cust_gender, cust_birth,cust_email,
+		cust_bno, cust_name, cust_gender, cust_birth,cust_email,
 		cust_id, cust_password, cust_address, cust_phone, cust_different)
 		VALUES (
-		#{cust_name},#{cust_gender},#{cust_birth},#{cust_email},#{cust_id},#{cust_password},
+		seq_cust.nextval,#{cust_name},#{cust_gender},#{cust_birth},#{cust_email},#{cust_id},#{cust_password},
 		#{cust_address},#{cust_phone},#{cust_different})	
 	</insert>
 	
-	<!-- 프로필 -->
-	<insert id="profile">
-		INSERT INTO cust_tbl(cust_job, cust_area,
-		cust_religion, cust_smoking, cust_drinking, cust_exer, cust_food, cust_pet,
-		cust_study, cust_hobby, cust_char, cust_photo, cust_say)
-		VALUES (#{cust_job},#{cust_area},#{cust_religion},#{cust_smoking},#{cust_drinking},#{cust_exer},
-		#{cust_food},#{cust_pet},#{cust_study},#{cust_hobby},#{cust_char},#{cust_photo},#{cust_say})	
-	</insert>
+	<!-- 프로필 등록-->
+	<update id="profile" parameterType="map">
+		UPDATE cust_tbl
+		SET cust_job=#{cust_job, jdbcType=VARCHAR}, cust_area=#{cust_area, jdbcType=VARCHAR}, cust_religion=#{cust_religion, jdbcType=VARCHAR}, 
+		cust_smoking=#{cust_smoking, jdbcType=VARCHAR}, cust_drinking=#{cust_drinking, jdbcType=VARCHAR}, 
+		cust_exer=#{cust_exer, jdbcType=VARCHAR}, cust_food=#{cust_food, jdbcType=VARCHAR}, 
+		cust_pet=#{cust_pet, jdbcType=VARCHAR}, cust_study=#{cust_study, jdbcType=VARCHAR}, 
+		cust_hobby=#{cust_hobby, jdbcType=VARCHAR}, cust_char=#{cust_char, jdbcType=VARCHAR}, cust_say=#{cust_say, jdbcType=VARCHAR}
+		WHERE cust_id = #{cust_id, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 프로필 보기 -->
+	<select id="myProfile" resultType="com.bteam.violet.domain.CustVO">
+		SELECT cust_id, cust_job, cust_area, cust_religion, cust_smoking, cust_drinking, 
+		cust_exer, cust_food, cust_pet, cust_study, cust_hobby, cust_char, cust_say 
+		FROM cust_tbl 
+		WHERE cust_id = #{cust_id, jdbcType=VARCHAR}
+	</select>
+	
 	
 	<!-- 아이디 중복 체크 -->
 	<select id="idChk" resultType="int">
@@ -85,9 +96,9 @@
 		cust_password = #{cust_password},
 		cust_name = #{cust_name},
 		cust_address = #{cust_address},
-		cust_phone = #{cust_phone}
+		cust_phone = #{cust_phone},
 		cust_email = #{cust_email}
-		WHERE cust_id = #{cust_id}
+		WHERE cust_id=#{cust_id}
 	</update>
 	
 	<!-- 회원탈퇴 -->
@@ -97,6 +108,8 @@
 		  AND cust_password = #{cust_password} 
 	</delete>
 	 
+	 
+
 	
 	 
 

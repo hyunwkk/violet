@@ -102,7 +102,7 @@ body {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>공지사항</title>
+    
     
 
     <!-- Bootstrap Core CSS -->
@@ -144,24 +144,42 @@ function closeNav() {
 </script>
 
 <body>
-<div class="header">
-	<div class="nav">
-		<h2 class="mainlogo"><a class="mainlogo-link" href="/violet">violet</a></h2>
-		<div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="${rootPath}/cust/login">login</a>
-	  <a href="#">mypage</a>
-	  <a href="#">story</a>
-	  <a href="#">chatting</a>
-	  <a href="#">search</a>
-	  <a href="#">profile</a>
-	  <a href="${rootPath}/notice/list">service</a>
-		</div>
-		<span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>
+<c:if test="${member == null and admin == null}">
+	<div class="header">
+		<div class="nav">
+			<h2 class="mainlogo"><a class="mainlogo-link" href="/violet">violet</a></h2>
+			<div id="mySidenav" class="sidenav">
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <a href="${rootPath}/cust/login">login</a>
+		  <a href="${rootPath}/cust/mypage">mypage</a>
+		  <a href="${rootPath}/cust/profile">profile</a>
+		  <a href="${rootPath}/story/getAll">story</a>
+		  <a href="${rootPath}/email/write.do">email</a>
+		  <a href="#">search</a>
+		  <a href="${rootPath}/notice/list">service</a>
+			</div>
+			<span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>
+		</div>	
 	</div>
-	
-
-</div>
+</c:if>
+<c:if test="${member != null || admin != null}">
+	<div class="header">
+		<div class="nav">
+			<h2 class="mainlogo"><a class="mainlogo-link" href="/violet">violet</a></h2>
+			<div id="mySidenav" class="sidenav">
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  <a href="${rootPath}/cust/logout">logout</a>
+		  <a href="${rootPath}/cust/mypage">mypage</a>
+		  <a href="${rootPath}/cust/profile">profile</a>
+		  <a href="${rootPath}/story/getAll">story</a>
+		  <a href="${rootPath}/email/write.do">email</a>
+		  <a href="#">search</a>
+		  <a href="${rootPath}/notice/list">service</a>
+			</div>
+			<span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>
+		</div>	
+	</div>
+</c:if>
 
     <div id="wrapper">
 
@@ -172,13 +190,7 @@ function closeNav() {
             </div> -->
            
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">공지사항</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+        
             <!-- /.row -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>       
 

@@ -27,7 +27,8 @@ body {
 }
 
 #container {
-	margin-left:680px;
+	width:100%;
+	margin-left:45%;
 	z-index: 1;
 }
 

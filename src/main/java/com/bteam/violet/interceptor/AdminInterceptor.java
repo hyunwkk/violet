@@ -16,7 +16,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 				
 		try {
 			if(req.getSession().getAttribute("admin") == null) {
-				log.info("비회원 이거나 관리자가 아닙니다. 홈페이지로 이동합니다.");
+				log.info("관리자가 아닙니다. 홈페이지로 이동합니다.");
 				res.sendRedirect("/violet/");
 				return false;
 			}

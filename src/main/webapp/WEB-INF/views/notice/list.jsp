@@ -4,6 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="../includes/header.jsp" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<title>notice</title>
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">공지사항</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
 
  <div class="row">
      <div class="col-lg-12">

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bteam.violet.mapper.ReplyMapper">
+
+	<insert id="insert">
+
+		insert into story_reply (reply_rno, story_bno, reply, cust_id)
+		values (seq_reply.nextval, #{story_bno}, #{reply}, #{cust_id})
+
+	</insert>
+
+	<select id="read" resultType="com.bteam.violet.domain.ReplyVO">
+
+		select * from story_reply where reply_rno = #{reply_rno}
+
+	</select>
+
+
+	<delete id="delete">
+
+		delete from story_reply where reply_rno = #{reply_rno}
+
+	</delete>
+
+	<update id="update">
+
+		update story_reply set reply = #{reply}, reply_updatedate = sysdate
+		where reply_rno = #{reply_rno}
+
+	</update>
+
+
+
+
+<select id="getListWithPaging" resultType="com.bteam.violet.domain.ReplyVO">
+
+  <![CDATA[
+ select reply_rno, story_bno, reply, cust_id, reply_regdate, reply_updatedate
+ from story_reply
+ where story_bno = #{story_bno}
+ order by reply_rno asc
+]]>
+
+</select>
+
+
+
+
+</mapper>

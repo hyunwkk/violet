@@ -25,13 +25,26 @@
 	
 	<context:component-scan base-package="com.bteam.violet.controller" />
 	<context:component-scan base-package="com.bteam.violet.chat" />
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
 
 	<beans:bean id="AdminInterceptor" class="com.bteam.violet.interceptor.AdminInterceptor"></beans:bean>
+	<beans:bean id="CustInterceptor" class="com.bteam.violet.interceptor.CustInterceptor"></beans:bean>
 
 	<interceptors>
 	 <interceptor>
 	  <mapping path="/admin/**" />
 	  <beans:ref bean="AdminInterceptor" />
+	 </interceptor>
+	 
+	 <interceptor>
+	  <mapping path="/cust/delete" />
+	  <mapping path="/cust/mypage" />
+	  <mapping path="/cust/profile" />
+	  <mapping path="/email/write.do" />
+	  <mapping path="/email/send.do" />
+	  <beans:ref bean="CustInterceptor" />
 	 </interceptor>
 	</interceptors>
 	
@@ -41,6 +54,5 @@
         <websocket:mapping handler="handlerChat" path="/chat" />
         <websocket:sockjs websocket-enabled="true" />
     </websocket:handlers>
-	
 	
 </beans:beans>
