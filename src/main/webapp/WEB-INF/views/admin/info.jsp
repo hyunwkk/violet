@@ -9,7 +9,7 @@
 <head>
 <style type="text/css">
 
-li {list-style: none; float: left; padding: 10px;}
+.pagenumber{list-style: none; float: left; padding: 10px;}
 
 .pagelist {
 	 display: flex;
@@ -19,6 +19,44 @@ li {list-style: none; float: left; padding: 10px;}
 
 .search{
 	float:right;
+	margin-bottom:10px;
+}
+
+.design {
+	/* padding-bottom:20px;
+	right:43%;
+	bottom:30%; */
+	position:absolute;
+	z-index:1;
+/* 	font-size:20px; */
+	line-height:-5px;
+	justify-content: center;
+	text-align:center;
+	/* color:white; */
+	margin-top:50px;
+    margin-left: 11%;
+}
+
+
+
+th {
+	/* color:white; */
+}
+
+
+
+.delete a:hover{
+	text-decoration:none;
+    color:red;
+}
+
+.delete-link {
+	/* color:white */;
+}
+
+.storydelete a:hover{
+	text-decoration:none;
+    color:red;
 }
 
 
@@ -47,7 +85,7 @@ li {list-style: none; float: left; padding: 10px;}
  
 </head>
 <body>
-	<div class="container">
+	<div class="design">
 	<h3>전체회원 정보 조회</h3>
 	<div class="search">
 	    <select name="searchType">
@@ -69,7 +107,7 @@ li {list-style: none; float: left; padding: 10px;}
 	    </script>
 	  </div>
 	<table class="table">
-	    <thead class="thead-dark">
+	    <thead class="thead-light">
 	      <tr>
 	        <th>아이디</th>
 			<th>비밀번호</th>
@@ -79,6 +117,7 @@ li {list-style: none; float: left; padding: 10px;}
 			<th>주소</th>
 			<th>가입일</th>
 			<th>회원구분</th>
+			<th>스토리</th>
 			<th>메뉴</th>
 	      </tr>
 	    </thead>
@@ -93,27 +132,29 @@ li {list-style: none; float: left; padding: 10px;}
 			<th>${info.cust_address}</th>
 			<th><fmt:formatDate pattern="yyyy-MM-dd" value="${info.cust_joindate}" /></th>
 			<th>${info.cust_different}</th>
-			<th class="delete"><a href="${rootPath}/admin/delete_proc.do?key=${info.cust_id}">삭제</a></th>
+			<th class="storydelete"><a href="${rootPath}/story/storylist?cust_id=${info.cust_id}">story</a></th>
+			<th class="delete"><a class="delete-link" href="${rootPath}/admin/delete_proc.do?key=${info.cust_id}">삭제</a></th>
 	    </tr>
 	    </c:forEach>   
 	  </table>	  
-	  <input type="hidden" id ="cust_dele" value="" />
-	</div>
+	  <!-- <input type="hidden" id ="cust_dele" value="" /> -->
+	
 
 	<div class="pagelist">
 	  <ul>
 	    <c:if test="${pageMaker.prev}">
-	    	<li><a href="info${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+	    	<li class="pagenumber"><a href="info${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 	    </c:if> 
 	
 	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-	    	<li><a href="info${pageMaker.makeSearch(idx)}">${idx}</a></li>
+	    	<li class="pagenumber"><a href="info${pageMaker.makeSearch(idx)}">${idx}</a></li>
 	    </c:forEach>
 	
 	    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-	    	<li><a href="info${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+	    	<li class="pagenumber"><a href="info${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 	    </c:if> 
 	  </ul>
+	</div>
 	</div> 
 	 
 	<script>	 
@@ -126,6 +167,5 @@ li {list-style: none; float: left; padding: 10px;}
  		  }
 	 });
 	</script>  	
-
 </body>
 </html>

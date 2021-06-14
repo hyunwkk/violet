@@ -90,10 +90,18 @@ public class CustDAOImpl implements CustDAO{
 	}
 
 	
-
+	// 아이디 찾기
+	@Override
+	public String getLoginId(CustVO custVO) throws Exception {
+		return sql.selectOne("CustMapper.custGetLoginId", custVO);
+	}
 	
+	/*// 비밀번호 찾기
+	@Override
+	public String getLoginPassword(CustVO custVO) throws Exception {
+		return sql.selectOne("CustMapper.custGetLoginPassword", custVO);
+	}*/
 	
-
 	
 	
 

@@ -8,6 +8,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:if test="${member.cust_id == null && admin.cust_id == null }">
+   <script>
+      alert("로그인 후 이용가능합니다.");
+      location.href="../cust/login";
+   </script>
+</c:if>
 <style>
 .profile-create {
 position:absolute;
@@ -15,10 +21,19 @@ position:absolute;
  left:40%;
 }
 
+.profile-create button:hover{
+background-color: #0B2161;
+}
+
 .btn-secondary {
 height:100px;
 width:300px;
+background-color: #0B2161;
+opacity:0.8;
+font-size:20px;
 }
+
+
 </style>
 <meta charset="UTF-8">
 <title>profile</title>
@@ -36,12 +51,12 @@ width:300px;
 <body>
 	<c:if test="${member.cust_job == null}">
 		<div class="profile-create">
-			<button type="button" class="btn btn-secondary" id="createBtn">프로필 생성</button>
+			<button type="button" class="btn btn-secondary" id="createBtn">Profile Create</button>
 		</div>
 	</c:if>
 	<c:if test="${member.cust_job != null}">
 		<div class="profile-create">		
-			<button type="button" class="btn btn-secondary" id="updateBtn">프로필 보기</button>
+			<button type="button" class="btn btn-secondary" id="updateBtn">Profile</button>
 		</div>
 	</c:if>
 	

@@ -71,6 +71,11 @@
 	</update>
 	
 	
-	
+	   <select id="listGet" resultType="com.bteam.violet.domain.StoryVO">
+	   <![CDATA[
+	   select * from story_tbl where cust_id = #{cust_id}
+	   order by story_bno desc
+	   ]]>
+	   </select>
 
 </mapper>

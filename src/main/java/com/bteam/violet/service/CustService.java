@@ -44,5 +44,11 @@ public interface CustService {
 	
 	//회원 사진 업로드 리스트
 	public List<CustVO> getAttachList(String cust_id);
+	
+	// 아이디 찾기
+	public String getLoginId(CustVO custVO) throws Exception;
+	
+	/*// 비번 찾기
+	public String getLoginPassword(CustVO custVO) throws Exception;*/
 
 }

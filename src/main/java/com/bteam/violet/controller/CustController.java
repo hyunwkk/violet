@@ -30,7 +30,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bteam.violet.domain.CustVO;
 import com.bteam.violet.service.CustService;
 
-import jdk.internal.net.http.common.Log;
 
 import lombok.extern.log4j.Log4j;
 
@@ -132,6 +131,47 @@ public class CustController {
 		
 	}
 	
+	
+	// 아이디/비밀번호 찾기 페이지 get
+	@RequestMapping(value="/custfind", method = RequestMethod.GET)
+	public String custFind() throws Exception{
+		return "cust/custfind";
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value="/getLoginId", method = RequestMethod.POST)
+	@ResponseBody
+	public String getloginId(CustVO custVO) {
+		String cust_id = "";
+		try {
+			cust_id = custService.getLoginId(custVO);
+		} catch (Exception e) {
+			logger.error("아이디 찾기 오류!!!");
+			e.printStackTrace();
+		}
+		return cust_id;
+	}
+	
+	/*// 비밀번호 찾기
+	@RequestMapping(value="/getLoginPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public String getloginPassword(CustVO custVO) {
+		
+		CustVO cust_password = custService.getLoginPassword(custVO);
+		boolean pwdMatch = pwdEncoder.matches(custVO.getCust_password(), cust_password.getCust_password());
+		String cust_password = "";
+		try {
+			cust_password = custService.getLoginPassword(custVO);
+		} catch (Exception e) {
+			logger.error("비밀번호 찾기 오류!!!");
+			e.printStackTrace();
+		}
+		return cust_password;
+	}
+*/
+	
+	
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception{
 		
@@ -225,38 +265,6 @@ public class CustController {
 			return "redirect:/";
 		}
 		
-		// 프로필 파일 업로드 ajax
-		/*@RequestMapping(value="/profileUploadAjax", method = RequestMethod.POST)
-		public void uploadAjaxPost(MultipartFile[] uploadFile) {
-			
-			logger.info("update ajax post...");
-			
-			String uploadFolder = "A:\\hyunwkk\\upload\\temp";
-			
-			for (MultipartFile multipartFile : uploadFile) {
-				
-				logger.info("--------------------------");
-				logger.info("Upload File Name: " + multipartFile.getOriginalFilename());
-				logger.info("Upload File Size: " +  multipartFile.getSize());
-				
-				String uploadFileName = multipartFile.getOriginalFilename();
-				
-				// IE has file path
-				uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-				
-				logger.info("only file name: " + uploadFileName);
-				
-				File saveFile = new File(uploadFolder, uploadFileName);
-				
-				try {
-					
-					multipartFile.transferTo(saveFile);
-					
-				}catch(Exception e) {
-					logger.error(e.getMessage());
-				}// catch
-			}// for
-		}*/
 		
 		//프로필 보기
 		@RequestMapping(value="/myprofile", method = RequestMethod.GET)
@@ -292,7 +300,7 @@ public class CustController {
 			logger.info("가져오는 세션값 :" + member);
 			logger.info("id:"+ member.getCust_id());
 			Object id = member.getCust_id(); 
-			params.put("cust_id", id); // params에 id map으로 저장
+			params.put("cust_id", id); // params에 id값 추가
 			logger.info("들고오는 값 : " + params);
 			logger.info("profile update..");
 			custService.profile(params); 

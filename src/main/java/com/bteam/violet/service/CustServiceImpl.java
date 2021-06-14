@@ -153,9 +153,18 @@ public class CustServiceImpl implements CustService{
 	}*/
 	
 
+	// 아이디 찾기
+	@Override
+	public String getLoginId(CustVO custVO) throws Exception {
+		return custDAO.getLoginId(custVO);
+	}
 	
-
-
+	/*// 비밀번호 찾기
+	@Override
+	public String getLoginPassword(CustVO custVO) throws Exception {
+		return custDAO.getLoginPassword(custVO);
+	}
+*/
 	
 
 }

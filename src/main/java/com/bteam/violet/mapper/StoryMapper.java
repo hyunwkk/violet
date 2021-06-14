@@ -25,7 +25,7 @@ public interface StoryMapper {
 
 	public List<StoryVO> findByBno(Long story_bno);
 	
-	
+	public List<StoryVO> listGet(String cust_id);
 	
 	
 }

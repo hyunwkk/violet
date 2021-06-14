@@ -116,7 +116,10 @@ public class StoryServiceImpl implements StoryService {
 	}
 	
 	
-	
+   @Override
+   public List<StoryVO> listGet(String cust_id) {
+      return mapper.listGet(cust_id);
+   }
 	
 	
 	

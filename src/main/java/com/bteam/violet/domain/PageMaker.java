@@ -75,6 +75,7 @@ public class PageMaker {
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 	
+	//UriComponents로 URI을 동적으로 생성!
 	public String makeQuery(int page) {
 		UriComponents uriComponents =
 		UriComponentsBuilder.newInstance()
@@ -85,9 +86,11 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
+	
+	//page, perPageNum, searchType, keyword를 url로 사용
 	public String makeSearch(int page)
 	{
-	
+
 	UriComponents uriComponents =
 				UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
