@@ -141,22 +141,16 @@ public class CustServiceImpl implements CustService{
 		return attachMapper.findById(cust_id);
 	}
 
-	
-	/*@Transactional
-	@Override
-	public boolean remove(String cust_id) {
-		
-		log.info("remove files ... " + cust_id);
-		attachMapper.deleteAll(cust_id);
-		
-		return 
-	}*/
-	
 
 	// 아이디 찾기
 	@Override
 	public String getLoginId(CustVO custVO) throws Exception {
 		return custDAO.getLoginId(custVO);
+	}
+
+	@Override
+	public List<CustVO> searchprofile(CustVO custVO) throws Exception {
+		return custDAO.searchprofile(custVO);
 	}
 	
 	/*// 비밀번호 찾기
@@ -165,6 +159,10 @@ public class CustServiceImpl implements CustService{
 		return custDAO.getLoginPassword(custVO);
 	}
 */
-	
+   // 비밀번호 변경
+   @Override
+   public void updatePassword(CustVO custVO) throws Exception {
+      custDAO.updatePassword(custVO);
+   }
 
 }

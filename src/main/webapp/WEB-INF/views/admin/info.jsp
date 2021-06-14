@@ -23,36 +23,20 @@
 }
 
 .design {
-	/* padding-bottom:20px;
-	right:43%;
-	bottom:30%; */
 	position:absolute;
 	z-index:1;
-/* 	font-size:20px; */
 	line-height:-5px;
 	justify-content: center;
 	text-align:center;
-	/* color:white; */
 	margin-top:50px;
     margin-left: 11%;
 }
-
-
-
-th {
-	/* color:white; */
-}
-
-
 
 .delete a:hover{
 	text-decoration:none;
     color:red;
 }
 
-.delete-link {
-	/* color:white */;
-}
 
 .storydelete a:hover{
 	text-decoration:none;
@@ -65,7 +49,6 @@ th {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -124,7 +107,6 @@ th {
 	    <c:forEach var="info" items="${custlist}" varStatus="st">
 	    <tr>
 	        <th>${info.cust_id}</th>
-			<%-- <th>${info.cust_password}</th> --%>
 			<th>*******</th>
 			<th>${info.cust_name}</th>
 			<th>${info.cust_gender}</th>
@@ -137,7 +119,6 @@ th {
 	    </tr>
 	    </c:forEach>   
 	  </table>	  
-	  <!-- <input type="hidden" id ="cust_dele" value="" /> -->
 	
 
 	<div class="pagelist">
