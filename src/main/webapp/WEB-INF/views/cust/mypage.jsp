@@ -121,22 +121,8 @@ $(document).ready(function() {
 </script>
 <body>
 	<div>
-		<div id="login_all">
-			<c:if test="${member != null}">
-				<div id="login_suc_header">
-					<p id="info_loginUser">${member.cust_id}님환영 합니다.</p>
-				</div>
-			</c:if>
-			<c:if test="${admin != null}">
-				<div id="login_suc_header">
-					<p id="info_loginUser">${admin.cust_id}님환영 합니다.</p>
-				</div>
-			</c:if>
-		</div>
 		<div>
-			<button id="logoutBtn" type="button" onclick="location.href='./logout'">로그아웃</button><br/>
-			<a href="/violet/cust/mypage">회원정보수정</a><br/>
-			<a href="#">비밀번호수정</a> <br/>
+			<a href="/violet/cust/updatepassword">비밀번호변경</a> <br/>
 			<a href="/violet/cust/delete">회원탈퇴</a><br/>
 		</div>		
 	</div>

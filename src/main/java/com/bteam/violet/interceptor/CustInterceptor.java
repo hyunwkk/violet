@@ -14,8 +14,6 @@ public class CustInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object obj) throws Exception {
 				
 		try {
-			/*if(req.getSession().getAttribute("member") == null || req.getSession().getAttribute("admin") == null) {*/
-			/*if(req.getSession() == null) {*/
 			if(req.getSession().getAttribute("member") == null) {
 				if(req.getSession().getAttribute("admin") == null) {
 					log.info("회원이 아닙니다. 로그인하세요!");

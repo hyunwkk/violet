@@ -409,61 +409,7 @@
         	<div class="form-group has-feedback">
 				<button class="btn btn-success" type="submit" id="form_submit">작성완료</button>
 				<button class="cencle btn btn-danger" type="button" id="">취소</button>
-				
 			</div>
-        	
-        
-        	<!-- <div class="form-group has-feedback">
-					<label class="control-label" for="cust_job">직업</label>
-					<input class="form-control" type="text" id="cust_job" name="cust_job" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_area">지역</label>
-					<input class="form-control" type="text" id="cust_area" name="cust_area" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_religion">종교</label>
-					<input class="form-control" type="text" id="cust_religion" name="cust_religion" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_smoking">흡연</label>
-					<input class="form-control" type="text" id="cust_smoking" name="cust_smoking" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_drinking">음주</label>
-					<input class="form-control" type="text" id="cust_drinking" name="cust_drinking" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_exer">운동</label>
-					<input class="form-control" type="text" id="cust_exer" name="cust_exer" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_food">음식</label>
-					<input class="form-control" type="text" id="cust_food" name="cust_food" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_pet">애완동물</label>
-					<input class="form-control" type="text" id="cust_pet" name="cust_pet" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_study">공부</label>
-					<input class="form-control" type="text" id="cust_study" name="cust_study" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_hobby">취미</label>
-					<input class="form-control" type="text" id="cust_hobby" name="cust_hobby" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_char">특징</label>
-					<input class="form-control" type="text" id="cust_char" name="cust_char" />
-				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="cust_say">하고싶은말</label>
-					<input class="form-control" type="text" id="cust_say" name="cust_say" />
-				</div> -->
-    
-		  
-		  
         </form>
     </div>
 </div>

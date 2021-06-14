@@ -50,5 +50,10 @@ public interface CustService {
 	
 	/*// 비번 찾기
 	public String getLoginPassword(CustVO custVO) throws Exception;*/
+	
+	public List<CustVO> searchprofile(CustVO custVO) throws Exception;
+	
+	// 비밀번호 변경
+	public void updatePassword(CustVO custVO) throws Exception;
 
 }

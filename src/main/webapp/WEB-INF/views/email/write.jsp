@@ -59,23 +59,5 @@
 	  <span style="color:red;">${message}</span>
 	</div>
 
-
-
-
-	<%-- <h2>이메일 보내기</h2><br/>
-	<form method="post" action="${rootPath}/email/send.do"> 
-	 
-		발신자 이름 : <input name="senderName"><br>
-		발신자 이메일 : <input name="senderMail"><br>
-		수신자 이메일 : <input name="receiveMail"><br>
-		제목 : <input name="subject"><br>
-		내용 : <textarea rows="5" cols="80" name="message"  placeholder="이름, 이메일, 연락처, 하고싶은 말을 순서대로 기입해 주세요."></textarea>
-		<br>
-		<input type="submit" value="전송">
-	</form> --%>
-
-
-
- 
 </body>
 </html>

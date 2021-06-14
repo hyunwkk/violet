@@ -209,15 +209,7 @@ public class CustController {
 		@RequestMapping(value="/custDelete")
 		public String custDelete(CustVO custVO, HttpSession session, RedirectAttributes rttr) throws Exception{
 			
-/*			CustVO member = (CustVO) session.getAttribute("member");
-			String sessionPassword = member.getCust_password();
-			String voPassword = custVO.getCust_password();
-			
-			if(!(sessionPassword.equals(voPassword))) {
-				rttr.addFlashAttribute("msg", false);
-				return "redirect:/cust/delete";
-			}
-			logger.info("고객님이 회원탈퇴 하였습니다.");*/
+			logger.info("고객님이 회원탈퇴 하였습니다.");
 			custService.custDelete(custVO);
 			session.invalidate();
 			return "redirect:/";
@@ -308,5 +300,24 @@ public class CustController {
 
 			return "redirect:/";
 		}
+		
+		
+		//비밀번호 변경get
+		   @RequestMapping(value="/updatepassword", method = RequestMethod.GET)
+		   public String updatePasswordView() throws Exception{
+		      return "cust/updatepassword";
+		   }
+
+		   //비밀번호 변경post
+		   @RequestMapping(value="/updatePassword")
+		   public String updatePassword(CustVO custVO, HttpSession session) throws Exception{
+		      String inputPass = custVO.getNew_password();
+		      String pwd = pwdEncoder.encode(inputPass);
+		      custVO.setNew_password(pwd);
+		      
+		      custService.updatePassword(custVO);
+		      session.invalidate();
+		      return "redirect:/";
+		   }
 
 }

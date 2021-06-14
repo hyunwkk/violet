@@ -27,8 +27,8 @@
 	
 	<!-- 프로필 보기 -->
 	<select id="myProfile" resultType="com.bteam.violet.domain.CustVO">
-		SELECT cust_id, cust_job, cust_area, cust_religion, cust_smoking, cust_drinking, 
-		cust_exer, cust_food, cust_pet, cust_study, cust_hobby, cust_char, cust_say 
+		SELECT cust_id, cust_name, cust_job, cust_area, cust_religion, cust_smoking, cust_drinking, 
+		cust_exer, cust_food, cust_pet, cust_study, cust_hobby, cust_char, cust_email, cust_say 
 		FROM cust_tbl 
 		WHERE cust_id = #{cust_id, jdbcType=VARCHAR}
 	</select>
@@ -44,7 +44,7 @@
 	<select id="passChk" resultType="int">
 	SELECT COUNT(*) 
 	FROM cust_tbl
-	WHERE cust_id = #{cust_id}
+	WHERE cust_id = #{cust_id, jdbcType=VARCHAR}
 	AND cust_password = #{cust_password} 
 	</select>
 
@@ -124,7 +124,12 @@
 		  AND cust_email = #{cust_email}
 	</select> 
 	
-
+   <!-- 비밀번호 변경 -->
+   <update id="updatePassword">
+   UPDATE cust_tbl 
+   SET cust_password = #{new_password}
+   WHERE cust_id = #{cust_id} 
+   </update>
 
 	
 	 

@@ -95,6 +95,11 @@ public class CustDAOImpl implements CustDAO{
 	public String getLoginId(CustVO custVO) throws Exception {
 		return sql.selectOne("CustMapper.custGetLoginId", custVO);
 	}
+
+	@Override
+	public List<CustVO> searchprofile(CustVO custVO) throws Exception {
+		return sql.selectOne("CustMapper.myProfile", custVO);
+	}
 	
 	/*// 비밀번호 찾기
 	@Override
@@ -102,7 +107,11 @@ public class CustDAOImpl implements CustDAO{
 		return sql.selectOne("CustMapper.custGetLoginPassword", custVO);
 	}*/
 	
-	
-	
+	 // 비밀번호 변경
+   @Override
+   public void updatePassword(CustVO custVO) throws Exception {
+      sql.update("CustMapper.updatePassword", custVO);
+   }
+
 
 }
