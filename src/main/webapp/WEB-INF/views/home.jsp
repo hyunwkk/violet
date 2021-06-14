@@ -34,24 +34,9 @@
 	}
 </script>
 <body>
-	<c:if test="${admin != null }">
-		<div>
-			<p>${admin.cust_id}님 환영 합니다.</p>
-		</div>
-	</c:if>
-	
-	<c:if test="${member != null }">
-		<div>
-			<p>${member.cust_id}님 환영 합니다.</p>
-		</div>
-	</c:if>
-	
-	<c:if test="${admin.cust_different == 1}">
-		<button id="adminpage" type="button">관리자 페이지</button>
-	</c:if>		
 		
 	<div class="home-p"><p>동네 친구 찾을 땐</br>violet로 오세요!</br>we make friends!</p></div>
 	
-	<img class="main-image" src="/violet/resources/images/1.png" />
+	<img class="main-image" src="/violet/resources/images/homeimage.jpg" />
 </body>
 </html>

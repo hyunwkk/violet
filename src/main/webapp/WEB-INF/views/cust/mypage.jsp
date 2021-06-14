@@ -19,6 +19,12 @@
 <!-- Custom Fonts -->
 <link href="<c:url value="/resources/vendor/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 <title>회원정보수정</title>
+<c:if test="${member.cust_id == null && admin.cust_id == null }">
+   <script>
+      alert("로그인 후 이용가능합니다.");
+      location.href="../cust/login";
+   </script>
+</c:if>
 <style>
 
 #container {
@@ -52,30 +58,66 @@
 </style>
 </head>
 <script type="text/javascript">
-	$(document).ready(function() {
-		// 취소
-		$(".cencle").on("click", function() {
+$(document).ready(function() {
+	// 취소
+	$(".cencle").on("click", function() {
 
-			location.href = "/violet";
-
-		})
-
-		$("#update_submit").on("click", function() {
-			if ($("#cust_password").val() == "") {
-				alert("비밀번호를 입력해주세요.");
-				$("#cust_password").focus();
-				return false;
-			}
-			if ($("#cust_name").val() == "") {
-				alert("성명을 입력해주세요.");
-				$("#cust_name").focus();
-				return false;
-			}
-			
-			alert("수정이 완료되었습니다.");
-		});
+		location.href = "/violet";
 
 	})
+
+	$("#update_submit").on("click", function() {
+		if ($("#cust_password").val() == "") {
+			alert("비밀번호를 입력해주세요.");
+			$("#cust_password").focus();
+			return false;
+		}
+		if ($("#cust_name").val() == "") {
+			alert("성명을 입력해주세요.");
+			$("#cust_name").focus();
+			return false;
+		}
+		
+		$.ajax({
+			url: "/violet/cust/passChk",
+			type: "POST",
+			dataType : "json",
+			data: $("#updateForm").serializeArray(),
+			success: function(data){
+				if(data==true){
+					if(confirm("회원수정을 하시겠습니까?")){
+						
+						var formObj = $("form");
+				        var str = "";
+				        
+				        $(".uploadResult ul li").each(function(i, obj){
+				          
+				          var jobj = $(obj);
+				          
+				          console.dir(jobj);
+				          
+				          str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+				          str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+				          str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+				          str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
+				        });
+				        formObj.append(str).submit();
+						
+						
+						
+						$("#updateForm").submit();
+					}
+				}else{
+					alert("패스워드가 일치하지 않습니다.");
+					return;
+				}
+			}
+		})
+		
+		/* alert("수정이 완료되었습니다."); */
+	});
+
+})
 </script>
 <body>
 	<div>
@@ -102,7 +144,7 @@
 
 	<section id="container">
 			<h2 id="updatelogo">회원정보수정</h2><br/>
-		<form role="form" action="/violet/cust/custUpdate" method="post">
+		<form role="form" id="updateForm" action="/violet/cust/custUpdate" method="post">
 			<c:if test="${member != null }">
 				<div class="form-group has-feedback">
 					<label class="control-label" for="cust_id">아이디</label> 
@@ -148,13 +190,7 @@
 				  
 				    </div>
 				  </div>
-				</div>
-				
-				
-				<div class="form-group has-feedback">
-					<button class="btn btn-success" data-oper='modify' type="submit" id="update_submit">수정완료</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
-				</div>
+				</div>				
 			</c:if>
 			
 			<c:if test="${admin != null }">
@@ -203,62 +239,19 @@
 				    </div>
 				  </div>
 				</div>
-				
-				
-				<div class="form-group has-feedback">
-					<button class="btn btn-success" data-oper='modify' type="submit" id="update_submit">수정완료</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
-				</div>
 			</c:if>
 		</form>
+			<div class="form-group has-feedback">
+				<button class="btn btn-success" data-oper='modify' type="button" id="update_submit">수정완료</button>
+				<button class="cencle btn btn-danger" type="button">취소</button>
+			</div>
 	</section>
 
 </body>
 
-<script type="text/javascript">
-$(document).ready(function() {
-
-
-	  var formObj = $("form");
-
-	  $('button').on("click", function(e){
-	    
-	    e.preventDefault(); 
-	    
-	    var operation = $(this).data("oper");
-	    
-	    console.log(operation);
-	    
-	    if(operation === 'modify'){
-	    	
-	        console.log("submit clicked");
-	        
-	        var str = "";
-	        
-	        $(".uploadResult ul li").each(function(i, obj){
-	          
-	          var jobj = $(obj);
-	          
-	          console.dir(jobj);
-	          
-	          str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
-	          str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
-	          str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
-	          str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
-	          
-	        });
-	        formObj.append(str).submit();
-	    	
-	    }
-	    
-	    formObj.submit();
-	  });
-
-});
-</script>
 
 <script>
-$(document).ready(function() {
+ $(document).ready(function() {
 	  (function(){
 	    
 	    var cust_id = '<c:out value="${member.cust_id}"/>';
@@ -420,4 +413,5 @@ $(document).ready(function() {
 	  
 });
 </script>
+
 </html>

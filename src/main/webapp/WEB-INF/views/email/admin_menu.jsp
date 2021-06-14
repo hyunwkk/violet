@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>email</title>
 </head>
 <body>
 <a href="/violet/email/write.do">이메일 발송</a> | 

@@ -5,6 +5,9 @@
 <%@include file="../includes/header.jsp" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <title>notice</title>
+<head>
+</head>
+
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -88,6 +91,7 @@
 		
 		history.replaceState({},null,null);
 		
+		// 공지사항 등록 후 알림 처리
 		function checkModal(result) {
 			if (result === '' || history.state) {
 				return;
@@ -102,6 +106,7 @@
 			$("#myModal").modal("show");
 		}
 		
+		// 공지사항 등록 페이지 이동
 		$("#regBtn").on("click", function(){
 			self.location="/violet/notice/register";
 		})

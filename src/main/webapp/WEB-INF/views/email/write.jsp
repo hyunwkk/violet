@@ -14,6 +14,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>email</title>
+<c:if test="${member.cust_id == null && admin.cust_id == null }">
+   <script>
+      alert("로그인 후 이용가능합니다.");
+      location.href="../cust/login";
+   </script>
+</c:if>
 <style>
 	.writeform {
 		text-align:center;

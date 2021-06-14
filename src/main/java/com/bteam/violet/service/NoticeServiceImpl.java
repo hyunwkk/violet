@@ -22,7 +22,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public void register(NoticeVO notice) {
-		log.info("register..." + notice);
+		log.info("register : " + notice);
 		mapper.insertSelectKey(notice);
 		
 	}
@@ -30,20 +30,20 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public NoticeVO get(Long notice_bno) {
 		
-		log.info("get....." + notice_bno);
+		log.info("get : " + notice_bno);
 		
 		return mapper.read(notice_bno);
 	}
 
 	@Override
 	public boolean modify(NoticeVO notice) {
-		log.info("modify..." + notice);
+		log.info("modify : " + notice);
 		return mapper.update(notice) == 1;
 	}
 
 	@Override
 	public boolean remove(Long notice_bno) {
-		log.info("remove..." + notice_bno);
+		log.info("remove : " + notice_bno);
 		return mapper.delete(notice_bno) == 1;
 	}
 

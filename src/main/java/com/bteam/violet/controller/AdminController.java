@@ -30,10 +30,13 @@ public class AdminController {
 	@Inject
 	CustService custService;
 	
+	
 	// 전체 회원정보 조회
+
 	@GetMapping("/info")
 	public String memberAll(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
-		
+		// srci는 modelAttribute로 자동으로 Model객체에 추가되서 jsp에서 사용
+		// pageMaker에서 계산한 값 Model에 저장		
 		log.info("members info");
 		
 		model.addAttribute("custlist", custService.custList(scri));

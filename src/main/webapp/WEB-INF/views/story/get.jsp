@@ -80,7 +80,7 @@
 							class="btn btn-info">List
 					</button>
 					
-					<c:if test="${member.cust_id == story.cust_id}">
+					<c:if test="${member.cust_id == story.cust_id || admin.cust_different ==1}">
 					<button data-oper='modify'
 							class="btn btn-default">
 							Modify
@@ -105,7 +105,9 @@
 	      
 	      <div class="panel-heading">
 	        <i class="fa fa-comments fa-fw"></i> 댓글
-	        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 쓰기</button>
+	        <c:if test="${member.cust_different == 0 || admin.cust_different == 0}">
+	        	<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 쓰기</button>
+	        </c:if>
 	      </div>      
 	      
 	      <div class="panel-body">        

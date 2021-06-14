@@ -23,5 +23,5 @@ public interface StoryService {
 	
 	public List<StoryVO> getAttachList(Long story_bno);
 	
-
+	public List<StoryVO> listGet(String cust_id);
 }

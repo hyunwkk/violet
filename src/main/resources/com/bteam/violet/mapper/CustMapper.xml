@@ -39,6 +39,14 @@
 		SELECT COUNT(*) FROM cust_tbl
 		WHERE cust_id = #{cust_id}	
 	</select>
+	
+	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+	SELECT COUNT(*) 
+	FROM cust_tbl
+	WHERE cust_id = #{cust_id}
+	AND cust_password = #{cust_password} 
+	</select>
 
 
 	 <!-- 로그인 -->
@@ -51,6 +59,7 @@
 	
 	
 	 <!-- 전체 회원정보 페이지 리스트-->
+	 <!-- search는 반복적으로 사용하므로 재활용할 수 있게 include로 삽입! -->
 	 <select id="info" resultType="com.bteam.violet.domain.CustVO" parameterType="com.bteam.violet.domain.Criteria">
 	 	SELECT cust_bno, cust_id, cust_password, cust_name, cust_gender, cust_phone, cust_address,
 				cust_joindate, cust_different
@@ -93,7 +102,7 @@
 	<!-- 회원정보 수정 -->
 	<update id="custUpdate">
 		UPDATE cust_tbl SET 
-		cust_password = #{cust_password},
+<!-- 		cust_password = #{cust_password}, -->
 		cust_name = #{cust_name},
 		cust_address = #{cust_address},
 		cust_phone = #{cust_phone},
@@ -105,10 +114,17 @@
 	<delete id="custDelete">
 		DELETE FROM cust_tbl
 		WHERE cust_id = #{cust_id}
-		  AND cust_password = #{cust_password} 
+<!-- 		  AND cust_password = #{cust_password}  -->
 	</delete>
 	 
-	 
+	 <!-- 아이디찾기 -->
+	<select id="custGetLoginId" parameterType="com.bteam.violet.domain.CustVO" resultType="String">
+		SELECT cust_id FROM cust_tbl
+		  WHERE cust_name = #{cust_name}
+		  AND cust_email = #{cust_email}
+	</select> 
+	
+
 
 	
 	 

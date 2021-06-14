@@ -149,13 +149,13 @@ public class StoryController {
 	    
 	    attachList.forEach(attach -> {
 	      try {
-	        Path file  = Paths.get("A:\\hyunwkk\\upload\\temp\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName());
+	        Path file  = Paths.get("c:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName());
 	        
 	        Files.deleteIfExists(file);
 	        
 	        if(Files.probeContentType(file).startsWith("image")) {
 	        
-	          Path thumbNail = Paths.get("A:\\hyunwkk\\upload\\temp\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName());
+	          Path thumbNail = Paths.get("c:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName());
 	          
 	          Files.delete(thumbNail);
 	        }
@@ -166,6 +166,31 @@ public class StoryController {
 	    });
 	  }
 	
+		
+	// 스토리 관리자 삭제
+	   @PostMapping("/adminremove")
+	   public String adminremove(@RequestParam("story_bno") Long story_bno, RedirectAttributes rttr) {
+
+	      
+	      log.info("remove..." + story_bno);
+
+	      List<StoryVO> attachList = service.getAttachList(story_bno);
+
+	      if (service.remove(story_bno)) {
+
+	         // delete Attach Files
+	         deleteFiles(attachList);
+
+	         rttr.addFlashAttribute("result", "success");
+	      }
+	      return "redirect:/admin/info";
+	   }
+	   
+	   @GetMapping("/storylist")
+	   public void storyListGET(@RequestParam("cust_id") String cust_id, Model model) {
+	      log.info("list");
+	      model.addAttribute("list", service.listGet(cust_id));
+	   }
 	
 	
 

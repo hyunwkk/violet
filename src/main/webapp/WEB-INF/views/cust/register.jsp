@@ -404,7 +404,7 @@ $(document).ready(function(e){
 				  </div>
 				</div>
 			
-			<input type="hidden" value="0" id="different" name="differnet" />
+			<input type="hidden" value="0" id="cust_different" name="cust_differnet" />
 
 			<div class="form-group has-feedback">
 				<button class="btn btn-success" type="submit" id="reg_submit">회원가입</button>

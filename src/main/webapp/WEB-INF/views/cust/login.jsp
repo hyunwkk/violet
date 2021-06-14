@@ -79,7 +79,7 @@ body {
 				<button type="button" id="register" onclick="location.href='./register'">회원가입</button>
 			</div>
 		</c:if><br/>
-		<a href="/violet/cust/findcust" id="findBtn">아이디/비밀번호 찾기</a>
+		<a href="/violet/cust/custfind" id="findBtn">아이디/비밀번호 찾기</a>
 	</form>
 	</div>
 </body>

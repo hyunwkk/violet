@@ -83,9 +83,16 @@
 		  </div>
 		</div>
 		
-		  <button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
-		  <button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
-		  <button type="submit" data-oper='list' class="btn btn-info">List</button>
+          	<c:if test="${member.cust_different == 0}">
+	           <button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
+	           <button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
+	           <button type="submit" data-oper='list' class="btn btn-info">List</button>
+	        </c:if>
+	        
+	        <c:if test="${admin.cust_different == 1}">
+	           <button type="submit" data-oper='adminremove' class="btn btn-danger">Remove</button>
+	           <button type="submit" data-oper='list' class="btn btn-info">List</button>        
+	        </c:if>
 		</form>
 
 
@@ -111,8 +118,16 @@ $(document).ready(function() {
 	    
 	    if(operation === 'remove'){
 	      formObj.attr("action", "/violet/story/remove");
-	      
-	    }else if(operation === 'list'){
+     
+	    }else if(operation === 'adminremove'){
+          if(confirm("삭제 하시겠습니까?")){
+              alert("삭제되었습니다.");
+             formObj.attr("action", "/violet/story/adminremove");
+           } else{
+              return;
+           }
+	           
+           }else if(operation === 'list'){
 	      //move to list
 	      formObj.attr("action", "/violet/story/getAll").attr("method","get");
 	      

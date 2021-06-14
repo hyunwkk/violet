@@ -31,33 +31,33 @@
 				<form role="form" action="/violet/notice/modify" method="post">
 					
 					<div class="form-group">
-						<label>Bno</label> <input class="form-control" name='notice_bno'
+						<label>번호</label> <input class="form-control" name='notice_bno'
 						value='<c:out value="${notice.notice_bno}"/>' readonly="readonly">
 					</div>
 	
 					<div class="form-group">
-						<label>Title</label> <input class="form-control" name='notice_title'
+						<label>제목</label> <input class="form-control" name='notice_title'
 						value='<c:out value="${notice.notice_title}"/>'>
 					</div>
 					
 					<div class="form-group">
-						<label>Text area</label>
+						<label>내용</label>
 						<textarea class="form-control" rows="3" name='notice_content'>
 						<c:out value="${notice.notice_content}" /></textarea>
 					</div>
 					
 					<div class="form-group">
-						<label>Writer</label> <input class="form-control" name='notice_writer'
+						<label>작성자</label> <input class="form-control" name='notice_writer'
 						value='<c:out value="${notice.notice_writer}"/>' readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label>Regdate</label> <input class="form-control" name='regdate'
+						<label>등록날짜</label> <input class="form-control" name='regdate'
 						value='<fmt:formatDate pattern = "yyyy/MM/dd" value="${notice.regdate}"/>' readonly="readonly">
 					</div>
 					
-					<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
-					<button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>
-					<button type="submit" data-oper='list' class="btn btn-info">List</button>
+					<button type="submit" data-oper='modify' class="btn btn-default">수정</button>
+					<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
+					<button type="submit" data-oper='list' class="btn btn-info">목록</button>
 					
 				</form>
 			</div>
