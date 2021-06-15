@@ -24,12 +24,12 @@
 
 .design {
 	position:absolute;
-	z-index:1;
+	z-index:-1;
 	line-height:-5px;
 	justify-content: center;
 	text-align:center;
-	margin-top:50px;
-    margin-left: 11%;
+	margin-top:30px;
+    margin-left: 70px;
 }
 
 .delete a:hover{

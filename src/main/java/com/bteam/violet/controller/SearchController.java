@@ -34,22 +34,27 @@ public class SearchController {
 	@Inject
 	CustService custService;
 	
-
+	// search 메인 페이지
 	@GetMapping("/searchmain")
 	public void searchView() {
 		log.info("search....");
 	}
 
-
+	// 전체 주변 친구 목록
 	@GetMapping("/area")
 	public void searcharea(HttpServletRequest request,Model model) throws Exception {
 		
-		log.info("area");
+//		log.info("area");
+//		List <CustVO> list = service.list();
+//		for(CustVO c:list) {
+//			log.info("c : " + c);
+//		}
+//		model.addAttribute("list", list );
 		model.addAttribute("list", service.list());
 	}
 	
 	
-	
+	// 전체 밥 같이 먹을 친구 목록
 	@GetMapping("/food")
 	public void searchmeal(Model model) throws Exception {
 		
@@ -58,6 +63,7 @@ public class SearchController {
 		model.addAttribute("list", service.list());
 	}
 	
+	// 전체 운동 친구 목록
 	@GetMapping("/exercise")
 	public void searchExercise(Model model) throws Exception {
 		
@@ -67,6 +73,7 @@ public class SearchController {
 	
 	}
 	
+	// 전체 반려동물 친구 목록
 	@GetMapping("/pet")
 	public void searchPet(Model model) throws Exception {
 		
@@ -76,6 +83,7 @@ public class SearchController {
 
 	}
 	
+	// 전체 공부친구 목록
 	@GetMapping("/study")
 	public void searchStudy(Model model) throws Exception {
 
@@ -94,9 +102,10 @@ public class SearchController {
 			
 			log.info("getarea...");
 			
-			model.addAttribute("list", service.arealist(cust_area));
-			//model.addAttribute("profile", custService.myProfile(cust_id));
-
+			List <CustVO> list =  service.arealist(cust_area);
+			
+			
+			model.addAttribute("arealist", list);
 			
 			
 		}
@@ -107,8 +116,10 @@ public class SearchController {
 			
 			log.info("getfood...");
 
+			List <CustVO> list =  service.foodlist(cust_food);
 			
-			model.addAttribute("foodlist", service.foodlist(cust_food));
+			
+			model.addAttribute("foodlist", list);
 			
 		}
 		
@@ -119,7 +130,10 @@ public class SearchController {
 			log.info("getexer...");
 
 			
-			model.addAttribute("exerlist", service.exerlist(cust_exer));
+			List <CustVO> list =  service.exerlist(cust_exer);
+			
+			
+			model.addAttribute("exerlist", list);
 			
 		}
 		
@@ -129,8 +143,10 @@ public class SearchController {
 			
 			log.info("getpet...");
 
+			List <CustVO> list =  service.petlist(cust_pet);
 			
-			model.addAttribute("petlist", service.petlist(cust_pet));
+			
+			model.addAttribute("petlist", list);
 			
 		}
 			
@@ -141,7 +157,11 @@ public class SearchController {
 			log.info("getstudy...");
 
 			
-			model.addAttribute("studylist", service.studylist(cust_study));
+			List <CustVO> list =  service.studylist(cust_study);
+			
+			// log.info("get(0)" + list.get(0));
+			
+			model.addAttribute("studylist", list);
 			
 		}
 	
@@ -168,7 +188,7 @@ public class SearchController {
 		}
 
 
-
+		
 		
 	
 	}

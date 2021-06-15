@@ -55,10 +55,25 @@
 	.uploadResult ul li img{
 	  width: 30%;
 	}
+	
+	#updatepassword button:hover{
+	text-decoration: none;
+	background-color: #0B2161;
+	}
+	
+	.btn-secondary {
+	background-color: #0B2161;
+	opacity:0.8;
+	font-size:15px;
+	}
+	
+	
+	
 </style>
 </head>
 <script type="text/javascript">
 $(document).ready(function() {
+
 	// 취소
 	$(".cencle").on("click", function() {
 
@@ -122,8 +137,9 @@ $(document).ready(function() {
 <body>
 	<div>
 		<div>
-			<a href="/violet/cust/updatepassword">비밀번호변경</a> <br/>
-			<a href="/violet/cust/delete">회원탈퇴</a><br/>
+			<button type="button" class="btn btn-secondary" id="updatepassword"  onclick="location.href='/violet/cust/updatepassword' ">비밀번호 변경</button>
+			<button type="button" class="btn btn-secondary" id="delete" onclick="location.href='/violet/cust/delete' ">회원탈퇴</button>
+
 		</div>		
 	</div>
 
@@ -209,7 +225,7 @@ $(document).ready(function() {
 				  <div class="col-lg-12">
 				    <div class="panel panel-default">
 				
-				      <div class="panel-heading">사진 첨부 수정</div>
+				      <div class="panel-heading">프로필 사진 수정</div>
 				      <div class="panel-body">
 				        <div class="form-group uploadDiv">
 				            <input type="file" name='uploadFile' multiple="multiple"/>
@@ -293,17 +309,7 @@ $(document).ready(function() {
 	     */
 	      var targetLi = $(this).closest("li");
 	      targetLi.remove();
-	     /*  
-	      $.ajax({
-	    	  url: '/violet/deleteFile',
-	    	  data: {fileName: targetFile, type:type},
-	    	  dataType:'text',
-	    	  type: 'POST',
-	    	  	success: function(result){
-	    	  		alert(result);
-	    	  		targetLi.remove();
-	    	  	}
-	      }) */
+	    
 	    }
 	  }); 
 	  

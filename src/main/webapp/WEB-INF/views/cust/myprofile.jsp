@@ -7,25 +7,28 @@
 <!DOCTYPE html>
 <html>
 <style>
-	.uploadResult{
-		width:100%
-		display:flex;
-	}
-	
-	.uploadResult ul{
-	  flex-flow: row;
-	  justify-content: center;
-	  align-items: center;
-	}
-	.uploadResult ul li {
-	  list-style: none;
-	  padding: 10px;
-	  align-content: center;
-	  text-align: center;
-	}
-	.uploadResult ul li img{
-	  width: 30%;
-	}
+.container{
+	z-index:-1;
+}
+.uploadResult{
+	width:100%
+	display:flex;
+}
+
+.uploadResult ul{
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.uploadResult ul li {
+  list-style: none;
+  padding: 10px;
+  align-content: center;
+  text-align: center;
+}
+.uploadResult ul li img{
+  width: 30%;
+}
 	
 </style>
 <head>

@@ -14,13 +14,11 @@
 
 <style>
 body {
-/* 	background-color: #D070FD; */
 	font-family: "Lato", sans-serif;
 }
 
 .mainlogo {
 	text-align: center;
-	/* margin-left: 50px; */
 	width:100%;
 	padding-bottom: 20px;
 	font-size: 40px;
@@ -35,7 +33,6 @@ body {
 #container {
 	text-align: center;
 	width:100%;
-	/* margin-left:680px; */
 	z-index: 1;
 }
 
@@ -85,20 +82,6 @@ $(document).ready(function(){
 			}
 		})
 	})	
-	
-	/* //dialog 딛기 버튼 클릭 이벤트
-	$("#btnClose").on({
-		click: function(){
-			$("#modalPU").remove();
-		},
-		keydown: function(e){
-			let keyCode = e.keyCode;
-			if(keyCode === '13'){
-				$(this).tigger("click");
-				//$("#btnClose").tigger("click"); //위에랑 같은 결과.
-			}
-		}
-	}) */
 })	
 
 	

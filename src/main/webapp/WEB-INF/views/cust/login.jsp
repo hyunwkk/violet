@@ -14,6 +14,11 @@ body {
    font-family: "Lato", sans-serif;
 }
 
+.container{
+	margin-left:38%;
+	margin-top:30px;
+}
+
 .mainlogo {
    text-align: center;
    /* margin-left: 50px; */
@@ -28,19 +33,35 @@ body {
    color: black;
 }
 
-#container {
+/* #container {
    width:100%;
-   margin-left:45%;
+   margin-top:30px;
+   margin-left:50%;
    z-index: 1;
-}
+} */
 
 #register {
-   margin-left: 33px;
+	margin-left: 15px;
+   	width:50%;
+   	text-align:center;
+   
 }
 
-#findBtn {
-   font-size: 14px;
-   margin-left: 10px;
+#findBtn {	
+   	font-size: 14px;
+	width:50%;
+	text-align:center;
+}
+
+#minicon{
+	margin-top:10px;
+	display:flex;
+	width:100%;
+
+}
+
+.panel-title{
+	text-align:center;
 }
 </style>
 </head>
@@ -72,8 +93,7 @@ body {
             }
          
          })
-    	  
-    	  
+    	      	  
          $.ajax({
          url: "/violet/cust/passChk",
          type: "POST",
@@ -89,38 +109,41 @@ body {
             }
          
          })
-      })
-      
-      
-      
-      
+      })   
    })
 </script>
 <body>
-   
-   <div id="container">
-   <form id='loginForm' method="post" action="/violet/cust/login">
-      <c:if test="${member == null}">
-         <div>
-            <label for="cust_id">아이디 </label><br/>
-            <input type="text" id="ucust_id" name="cust_id">
-         </div><br/>
-         <div>
-            <label for="cust_password">비밀번호</label><br/>
-            <input type="password" id="cust_password" name="cust_password">
-         </div><br/>
-         <div>
-            
-            <!-- test f -->
-            <c:if test="${msg == false}">
-               <p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-            </c:if>
-            <button type="button" id="register" onclick="location.href='./register'">회원가입</button>
-         </div>
-      </c:if><br/>
-      <a href="/violet/cust/custfind" id="findBtn">아이디/비밀번호 찾기</a>
-   </form>
-   <button type="button" id="login_submit">로그인</button>
-   </div>
+   <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Login</h3><br>
+                    </div>
+                    <div class="panel-body">
+                        <form id='loginForm' method="post" action="/violet/cust/login">
+                            <fieldset>
+                                <div class="form-group">
+                                	<label for="cust_id">id </label><br/>
+                                    <input class="form-control" type="text" id="ucust_id" name="cust_id" autofocus>
+                                </div>
+                                <div class="form-group">
+                                	<label for="cust_id">password </label><br/>
+                                    <input class="form-control" type="password" id="cust_password" name="cust_password">
+                                </div>
+		
+                            </fieldset>
+                        </form>
+                        <button type="button" id="login_submit" class="btn btn-lg btn-success btn-block">login</button>
+                        <div id="minicon">
+	                        <a href="/violet/cust/custfind" id="findBtn" class="btn btn-outline-success">아이디/비밀번호 찾기</a>
+	                        <a href="/violet/cust/register" id="register" class="btn btn-outline-success">회원가입</a>
+                       </div>
+                        
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

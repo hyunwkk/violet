@@ -42,7 +42,7 @@ $(document).ready(function() {
 			success: function(data){
 				if(data==true && $("#new_password").val() == $("#newPasswordChk").val() && $("#new_password").val() != ""){
 					console.log("비밀번호 확인");
-	 					if(confirm("비밀번호를 수정하시겠습니까??")){
+	 					if(confirm("비밀번호를 수정하시겠습니까?")){
 	 						
 	 						$("#updateForm").submit();
 						}
@@ -69,19 +69,6 @@ $(document).ready(function() {
 })
 </script>
 <body>
-	<div>
-		<div id="login_all">
-			<c:if test="${member != null }">
-				<input type="hidden" id="real_pass" value="${member.cust_password}">
-				<div id="login_suc_header">
-					<a href="/violet/cust/updatepassword">비밀번호변경</a> <br/>
-					<a href="/violet/cust/delete">회원탈퇴</a><br/>
-				</div>
-			</c:if>
-		</div>
-	</div>
-
-
 	<section id="container">
 			<h2 id="updatelogo">비밀번호 변경</h2><br/>
 		<form role="form" id="updateForm" action="/violet/cust/updatePassword" method="post">
@@ -102,8 +89,6 @@ $(document).ready(function() {
 				<input class="form-control" type="password" id="newPasswordChk" name="newPasswordChk" />
 			</div>	
 			<div class="form-group has-feedback">
-<!-- 				<input type="submit" class="btn btn-success" id="update_submit" value="변경">
-				<button class="cencle btn btn-danger" type="button">취소</button> -->
 			</div>  
 		</form>
 				<button type="button" class="btn btn-success" id="update_submit" value="변경">변경</button>

@@ -96,17 +96,6 @@
 				
 	});
 </script>
-<!-- <div class="container">
-	<h2>선택(select) 상자</h2>
-	<select class="form-control" id="test">
-		<option value="" selected disabled hidden>Choose here</option>
-	  <option value="1">원</option>
-	  <option value="2">투</option>
-	  <option value="3">쓰리</option>
-	  <option value="4">포</option>
-	  <option value="5">파이브</option>
-	</select>
-</div> -->
 
 <div class="container">
              
@@ -121,17 +110,7 @@
         	<table class="table table-striped">
 		    <thead>
 		    </thead>
-		    <tbody>
-		    	<!-- <tr>
-		        <td>프로필 사진</td>
-		        <td>
-		        	<div class='uploadDiv'>
-						<input type='file' name='uploadFile' multiple>
-					</div>
-					
-					<button id='uploadBtn'>Upload</button>
-		        </td>
-		      </tr> -->
+		    <tbody>		    	
 		      <tr>
 		        <td>직업</td>
 		        <td><input type="text" class="form-control" id="cust_job" name="cust_job"/></td>

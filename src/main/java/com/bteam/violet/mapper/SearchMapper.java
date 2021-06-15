@@ -4,15 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.bteam.violet.domain.Criteria;
 import com.bteam.violet.domain.CustVO;
 
 
 public interface SearchMapper {
 
+	// 전체 친구 리스트
 	List<CustVO> list();
 
-	List<CustVO> searcharea(Criteria cri);
 
 	// 주변 친구 조회
 	public List<CustVO> arealist(@Param("cust_area") String cust_area);
