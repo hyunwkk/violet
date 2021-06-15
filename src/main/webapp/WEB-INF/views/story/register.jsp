@@ -130,6 +130,8 @@ $(document).ready(function(e){
     
     formObj.append(str).submit();
     
+    alert("등록되었습니다."); 
+    
   });
 
   

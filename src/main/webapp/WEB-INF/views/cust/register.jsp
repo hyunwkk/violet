@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@include file="../includes/headerbar.jsp" %>
 <html>
 <head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -12,11 +13,16 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!-- Custom CSS -->
+<link href="<c:url value="/resources/dist/css/sb-admin-2.css"/>" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="<c:url value="/resources/vendor/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
+
 <title>회원가입</title>
 
 <style>
 body {
-/* 	background-color: #D070FD; */
 	font-family: "Lato", sans-serif;
 }
 
@@ -60,12 +66,6 @@ body {
 } 
 
 </style>
-
-    <!-- Custom CSS -->
-    <link href="<c:url value="/resources/dist/css/sb-admin-2.css"/>" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="<c:url value="/resources/vendor/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -343,9 +343,7 @@ $(document).ready(function(e){
 
 </script>
 <body>
-	<h2 class="mainlogo">
-		<a class="mainlogo-link" href="/violet">violet</a>
-	</h2>
+	<h2 class="mainlogo">회원가입</h2>
 	<section id="container">
 		<form role="form" action="/violet/cust/custReg" method="post" id="regForm">
 			<div class="form-group has-feedback">

@@ -55,7 +55,8 @@ public class CustVO {
       this.uuid = uuid;
    }
    public String getUploadPath() {
-      return uploadPath;
+	   uploadPath = uploadPath.replace("\\", "/");
+	   return uploadPath;
    }
    public void setUploadPath(String uploadPath) {
       this.uploadPath = uploadPath;

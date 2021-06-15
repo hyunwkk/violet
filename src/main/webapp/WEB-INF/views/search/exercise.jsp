@@ -12,10 +12,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
 
-    <style>
+ <style>
+ 
+ 	
 
     .header{
         text-align: center;
@@ -31,7 +31,6 @@
     .friend1{
         padding:20px;
         color: black;
-        /* background-color: rgb(22, 201, 141); */
         width: 40%;
         margin-bottom: 30px;
         border-radius: 5px; 
@@ -43,6 +42,10 @@
 
     </style>
 
+</head>
+<body>
+
+   
 
 
 
@@ -52,15 +55,17 @@
      
         <select id="cust_exer" name="cust_exer" class="form-select" style="height: 50px; width: auto;" aria-label="Default select example">
             <option selected>--운동종목선택 --</option>
+            <option value='헬스'>헬스</option>
+            <option value='런닝'>런닝</option>
+            <option value='요가'>요가</option>
+            <option value='필라테스'>필라테스</option>
+            <option value='야구'>야구</option>
             <option value='축구'>축구</option>
             <option value='농구'>농구</option>
-            <option value='야구'>야구</option>
-            <option value='달리기'>달리기</option>
             <option value='테니스'>테니스</option>
-            <option value='탁구'>탁구</option>
-            <option value='족구'>족구</option>
-            <option value='헬스'>헬스</option>
+            <option value='복싱'>복싱</option>
             <option value='기타'>기타</option>
+            
           </select>
 
  
@@ -68,9 +73,9 @@
         
               <div class="row" >
             <c:forEach items="${list}" var="custvo">
-            <div class="col-md-6">
-                <div class="card" style="width: 18rem; height:450px; margin-left:150px; margin-bottom: 20px;">                    
-				<img src='' onerror="if (this.src != '/경로1/이미지.png') this.src = 'D:\upload\temp\${searcharea.cust_name}.jpg'};" />
+            <div >
+                <div class="card" style="width: 18rem; height:500px; margin-left:140px; margin-bottom: 20px;">                    
+				<img src="<c:url value="/img/${custvo.uploadPath}/${custvo.uuid}_${custvo.fileName}" />" style="width:18rem; height:350px;" > 
                     <div class="card-body">
                       <h5 class="card-title">이름 : ${custvo.cust_name } </h5>
                       <p class="card-text">운동종목 : ${custvo.cust_exer }</p>
@@ -98,7 +103,6 @@ $("select[name=cust_exer]").change(function(){
 $("button[name^=cust_id]").click(function(e){
 	var id = e.currentTarget.id.substring("cust_id_".length)
 	
-	// var profile = '<c:out value="${profilelist.cust_id}" />';
 	
 	console.log("cust_id=" + id);
 	

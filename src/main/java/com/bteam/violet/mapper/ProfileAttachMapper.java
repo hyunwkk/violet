@@ -12,10 +12,10 @@ public interface ProfileAttachMapper {
 	//사진 삭제
 	public void delete(String uuid);
 	
-	
+	//아이디 결합
 	public List<CustVO> findById(String cust_id);
 	
-	
+	//아이디별 삭제
 	public void deleteAll(String cust_id);
 	
 

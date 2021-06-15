@@ -12,10 +12,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
 
-    <style>
+  <style>
+  
+  
 
     .header{
         text-align: center;
@@ -43,6 +43,10 @@
 
     </style>
 
+</head>
+<body>
+
+  
 
 
     <div class="friend1">
@@ -53,7 +57,10 @@
           <select id="cust_study" name="cust_study" class="form-select" style="height: 50px; width: auto;" aria-label="Default select example">
            <option selected>-- 공부선택 --</option>
 		   <option value="카페">카페</option>            
-		   <option value='자격증'>자격증</option>
+		   <option value='스터디카페'>스터디카페</option>
+   		   <option value='독서실'>독서실</option>
+  		   <option value='스터디룸'>스터디룸</option>
+   		   <option value='기타'>기타</option>
           </select>
 
  
@@ -61,9 +68,9 @@
         
           <div class="row" >
             <c:forEach items="${studylist}" var="custvo">
-            <div class="col-md-6">
-                <div class="card" style="width: 18rem; height:450px; margin-left:150px; margin-bottom: 20px;">                    
-				<img src='' onerror="if (this.src != '/경로1/이미지.png') this.src = 'D:\upload\temp\${searcharea.cust_name}.jpg'};" />
+            <div >
+                <div class="card" style="width: 18rem; height:500px; margin-left:140px; margin-bottom: 20px;">                    
+				<img src="<c:url value="/img/${custvo.uploadPath}/${custvo.uuid}_${custvo.fileName}" />" style="width:18rem; height:350px;" > 
                     <div class="card-body">
                       <h5 class="card-title">이름 : ${custvo.cust_name } </h5>
                       <p class="card-text">공부 : ${custvo.cust_study }</p>
@@ -91,7 +98,6 @@ $("select[name=cust_study]").change(function(){
 $("button[name^=cust_id]").click(function(e){
 	var id = e.currentTarget.id.substring("cust_id_".length)
 	
-	// var profile = '<c:out value="${profilelist.cust_id}" />';
 	
 	console.log("cust_id=" + id);
 	
