@@ -1,48 +1,149 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@include file="../includes/headerbar.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<style>
+body {
+   overflow-x:hidden;
+   font-family: "Lato", sans-serif;
+}
+
+.container{
+	margin-left:38%;
+	margin-top:30px;
+}
+
+.mainlogo {
+   text-align: center;
+   /* margin-left: 50px; */
+   width:100%;
+   padding-bottom: 20px;
+   font-size: 40px;
+   height: 30px;
+}
+
+.mainlogo-link {
+   text-decoration: none;
+   color: black;
+}
+
+/* #container {
+   width:100%;
+   margin-top:30px;
+   margin-left:50%;
+   z-index: 1;
+} */
+
+#register {
+	margin-left: 15px;
+   	width:50%;
+   	text-align:center;
+   
+}
+
+#findBtn {	
+   	font-size: 14px;
+	width:50%;
+	text-align:center;
+}
+
+#minicon{
+	margin-top:10px;
+	display:flex;
+	width:100%;
+
+}
+
+.panel-title{
+	text-align:center;
+}
+</style>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#logoutBtn").on("click", function(){
-			location.href="cust/logout";
-		})
-		
-		$("#register").on("click", function(){
-			location.href="/violet/cust/register";
-		})
-		
-	})
+   $(document).ready(function(){
+      $("#logoutBtn").on("click", function(){
+         location.href="cust/logout";
+      })
+      
+      $("#register").on("click", function(){
+         location.href="./register";
+      })
+      
+      $("#login_submit").on("click", function(){
+    	  
+    	  $.ajax({
+         url: "/violet/cust/idChk",
+         type: "POST",
+         dataType : "json",
+         data: $("#loginForm").serializeArray(),
+         success: function(data){
+               if(data == true){
+                  $("#loginForm").submit();
+               }else{
+                  alert("아이디가 일치하지 않습니다.");
+                  location.href="/violet/cust/login";
+               }
+            }
+         
+         })
+    	      	  
+         $.ajax({
+         url: "/violet/cust/passChk",
+         type: "POST",
+         dataType : "json",
+         data: $("#loginForm").serializeArray(),
+         success: function(data){
+               if(data == true){
+                  $("#loginForm").submit();
+               }else{
+                  alert("비밀번호가 일치하지 않습니다.");
+                  location.href="/violet/cust/login";
+               }
+            }
+         
+         })
+      })   
+   })
 </script>
 <body>
-	<form name='homeForm' method="post" action="/violet/cust/login">
-		<c:if test="${member == null}">
-			<div>
-				<label for="cust_id"></label>
-				아이디 : <input type="text" id="cust_id" name="cust_id">
-			</div>
-			<div>
-				<label for="cust_password"></label>
-				비밀번호 : <input type="password" id="cust_password" name="cust_password">
-			</div>
-			<div>
-				<button type="submit">로그인</button>
-				<!-- test f -->
-				 <c:if test="${masg eq '3'}"> 
-					<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-				 </c:if> 
-				<button type="button" id="register" >회원가입</button>
-			</div>
-		</c:if>
+   <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Login</h3><br>
+                    </div>
+                    <div class="panel-body">
+                        <form id='loginForm' method="post" action="/violet/cust/login">
+                            <fieldset>
+                                <div class="form-group">
+                                	<label for="cust_id">id </label><br/>
+                                    <input class="form-control" type="text" id="ucust_id" name="cust_id" autofocus>
+                                </div>
+                                <div class="form-group">
+                                	<label for="cust_id">password </label><br/>
+                                    <input class="form-control" type="password" id="cust_password" name="cust_password">
+                                </div>
 		
-		
-	</form>
+                            </fieldset>
+                        </form>
+                        <button type="button" id="login_submit" class="btn btn-lg btn-success btn-block">login</button>
+                        <div id="minicon">
+	                        <a href="/violet/cust/custfind" id="findBtn" class="btn btn-outline-success">아이디/비밀번호 찾기</a>
+	                        <a href="/violet/cust/register" id="register" class="btn btn-outline-success">회원가입</a>
+                       </div>
+                        
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

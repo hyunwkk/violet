@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bteam.violet.mapper.StoryMapper">
+
+	<select id="listAll" resultType="com.bteam.violet.domain.StoryVO">
+	<![CDATA[
+	select * from story_tbl where story_bno > 0
+	order by story_bno desc
+	]]>
+	</select>
+	
+	
+	<select id="getAll" resultType="com.bteam.violet.domain.StoryVO">
+	<![CDATA[
+	select * 
+	from 
+	    (select * from story_tbl where story_bno > 0
+	order by story_bno desc)
+	where rownum <= 1
+	]]>
+	</select>
+	
+	<select id="getinfiniteScrollDown" resultType="com.bteam.violet.domain.StoryVO">
+	<![CDATA[
+	select * 
+	from 
+	    (select * from story_tbl
+	order by story_bno desc)
+	where story_bno <= #{story_bno} and rownum = 1
+	]]>
+	</select>
+	
+	<insert id="insert">
+		insert into story_tbl (story_bno, cust_id, story_text)
+		values (seq_story.nextval, #{cust_id}, #{story_text})
+	</insert>
+	
+	<insert id="insertSelectKey">
+	
+		<selectKey keyProperty="story_bno" order="BEFORE"
+			resultType="long">
+			select seq_story.nextval from dual
+		</selectKey>
+	
+		insert into story_tbl (story_bno, cust_id, story_text)
+		values (#{story_bno},#{cust_id},#{story_text})
+	
+	</insert>
+	
+	
+	
+	<select id="read" resultType="com.bteam.violet.domain.StoryVO">
+	select * from story_tbl where story_bno = #{story_bno}
+	</select>
+	
+	
+	
+	<delete id="delete">
+	delete from story_tbl where story_bno = #{story_bno}
+	</delete>
+
+
+	<update id="update">
+		update story_tbl
+		set story_text=#{story_text},
+		cust_id = #{cust_id},
+		story_updatedate = sysdate
+		where story_bno = #{story_bno}
+	</update>
+	
+	
+	   <select id="listGet" resultType="com.bteam.violet.domain.StoryVO">
+	   <![CDATA[
+	   select * from story_tbl where cust_id = #{cust_id}
+	   order by story_bno desc
+	   ]]>
+	   </select>
+
+</mapper>

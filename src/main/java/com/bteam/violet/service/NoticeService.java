@@ -19,10 +19,10 @@ public interface NoticeService {
 	// 공지사항 제거
 	public boolean remove(Long notice_bno);
 	
-	// 공지사항 목록 가져오기
+	// 공지사항 조회
 	public List<NoticeVO> getList();
 	
-	// 공지사항 클릭 갯수
+	// 공지사항 조회수 증가
 	public NoticeVO getcount(Long notice_bno);
 	
 	

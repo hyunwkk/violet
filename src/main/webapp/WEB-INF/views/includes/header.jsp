@@ -8,91 +8,184 @@
 
 <head>
 <style>
-body {
-	font-family: "Lato", sans-serif;
+
+  ul{
+   list-style:none;
+
+   } 
+
+.navbar-expand-sm{
+   z-index: 1020;
+}
+
+.navbar{
+   height:110px;
 }
 
 .sidenav {
-	height: 100%;
-	width: 0;
-	position: fixed;
-	z-index: 2000;
-	top: 0;
-	right: 0;
-	background-color: #C0C0C0;
-	overflow-x: hidden;
-	transition: 0.5s;
-	/* padding-top: 60px; */
+   height: 100%;
+   width: 0;
+   position: fixed;
+   top: 0;
+   right: 0;
+   background-color: #0B2161;
+   overflow-x: hidden;
+   transition: 0.5s;
+   opacity: 0.8;
+   z-index:99999999;
+   
+   /* padding-top: 60px; */
 }
 
 .sidenav a {
-	padding: 8px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 25px;
-	color: #818181;
-	display: block;
-	transition: 0.3s;
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 25px;
+   color: #818181;
+   display: block;
+   transition: 0.3s;
+   z-index:99999999;
 }
 
 .sidenav a:hover {
-	color: #f1f1f1;
+   color: #f1f1f1;
 }
 
 .sidenav .closebtn {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	font-size: 36px;
-	margin-left: 50px;
+   position: absolute;
+   top: 0;
+   right: 25px;
+   font-size: 36px;
+   margin-left: 50px;
 }
+.navbar{
+   background-color: #0B2161;
+    opacity: 0.8;
+}
+
+.nav-link{
+   color:white;
+    font-size:15px;
+}
+
+.nav-link a:hover{
+   text-decoration:none;
+}
+
+.mainlink{
+
+}
+
+.main {
+   margin-bottom:20px;
+   font-size:45px;
+   margin-right:20px;
+   padding-right:15px;
+
+}
+
+.mainlink a:hover{
+   text-decoration:none;
+    color:white;
+}
+
+.login{
+   margin-left:22px;
+    margin-top:31px;
+}
+
+.nav_bar{
+   padding-top:15px;
+   color:white;
+}
+
+.home-p{
+   padding-bottom:20px;
+   right:43%;
+   bottom:30%;
+   position:absolute;
+   z-index:1;
+   font-size:20px;
+   line-height:-5px;
+   text-align:center;
+   color:white;
+}
+
+.main-image {
+   width:100%;
+   z-index:-1;
+
+}
+
+.admin {
+/*    margin-left:10px;
+   margin-top:30px; */
+}
+
+.adminlink{
+   margin-top:31px;
+   margin-left:26px;
+}
+
+.adminlink a:hover{
+   text-decoration:none;
+    color:white;
+}
+
+
+
 .nav_bar {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	
-	
+   position: absolute;
+   top: 0;
+   right: 25px;
+<!---->   
+   
 }
 .header {
-	background:#808080;
-	width:100%;
-	height:100px;
-	display:flex;
-	<!--opacity: 0.01;-->
+   background:#808080;
+   width:100%;
+   height:100px;
+   display:flex;
+   <!--opacity: 0.01;-->
 }
 
 .nav .mainlogo{
-	margin-left:50px;
-	padding-bottom:20px;
-	font-size:40px;
-	height:30px;
-	
-	
+   margin-left:50px;
+   padding-bottom:20px;
+   font-size:40px;
+   height:30px;
+   
+   
 }
 
 .mainlogo-link {
-	color:white;
+   color:white;
 }
 
 .nav .nav_bar{
-	margin-right:30px;
-	margin-top:15px;
-	color:white;
+   margin-right:30px;
+   margin-top:15px;
+   color:white;
 }
 
 .mainlogo a:hover{
-	text-decoration:none;
-	color:white;
+   text-decoration:none;
+   color:white;
+}
+
+.nav-item{
+   margin-top:15px;
 }
 
 
 
 @media screen and (max-height: 450px) {
-	.sidenav {
-		padding-top: 15px;
-	}
-	.sidenav a {
-		font-size: 18px;
-	}
+   .sidenav {
+      padding-top: 15px;
+   }
+   .sidenav a {
+      font-size: 18px;
+   }
 }
 </style>
 
@@ -102,7 +195,7 @@ body {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>공지사항</title>
+    
     
 
     <!-- Bootstrap Core CSS -->
@@ -143,25 +236,69 @@ function closeNav() {
 }
 </script>
 
-<body>
-<div class="header">
-	<div class="nav">
-		<h2 class="mainlogo"><a class="mainlogo-link" href="/violet">violet</a></h2>
-		<div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="${rootPath}/cust/login">login</a>
-	  <a href="#">mypage</a>
-	  <a href="#">story</a>
-	  <a href="#">chatting</a>
-	  <a href="#">search</a>
-	  <a href="#">profile</a>
-	  <a href="${rootPath}/notice/list">service</a>
-		</div>
-		<span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>
-	</div>
-	
 
-</div>
+
+<body>
+   <c:if test="${member == null and admin == null}">
+   <nav class="navbar navbar-expand-sm">
+     <!-- Links -->
+     <ul class="navbar-nav">
+       <li class="nav-item">
+         <div class="mainlink"><a class="nav-link main" href="/violet">violet</a></div>
+       </li>
+       <li class="nav-item">
+
+       </li>
+     </ul>      
+           <div id="mySidenav" class="sidenav">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+              <a href="${rootPath}/cust/login">login</a>
+              <a href="${rootPath}/cust/mypage">mypage</a>
+              <a href="${rootPath}/cust/profile">profile</a>
+              <a href="${rootPath}/story/getAll">story</a>
+              <a href="${rootPath}/email/write.do">email</a>
+              <a href="${rootPath}/search/searchmain">search</a>
+              <a href="${rootPath}/notice/list">service</a>
+          </div>
+          <span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>
+       
+   </nav>
+   </c:if>
+
+   <c:if test="${member != null || admin != null}">
+      <nav class="navbar navbar-expand-sm">
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <div class="mainlink"><a class="nav-link main" href="/violet">violet</a></div>
+          </li>
+          <li class="nav-item">
+            <c:if test="${member != null }">
+            <p class="nav-link login">${member.cust_id}님 환영합니다.</p>
+           </c:if>
+           <c:if test="${admin != null }">
+            <p class="nav-link login">${admin.cust_id}님 환영합니다.</p>            
+           </c:if>
+          </li>
+          <li class="nav-item">
+             <c:if test="${admin.cust_different == 1}">
+              <div class="adminlink"><a class="nav-link admin" href="/violet/admin/info">관리자 페이지</a></div>
+              </c:if>
+          </li>
+        </ul>      
+              <div id="mySidenav" class="sidenav">
+                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                 <a href="${rootPath}/cust/logout">logout</a>
+                 <a href="${rootPath}/cust/mypage">mypage</a>
+                 <a href="${rootPath}/cust/profile">profile</a>
+                 <a href="${rootPath}/story/getAll">story</a>
+                 <a href="${rootPath}/email/write.do">email</a>
+                 <a href="${rootPath}/search/searchmain">search</a>
+                 <a href="${rootPath}/notice/list">service</a>
+             </div>
+             <span class="nav_bar" style="font-size:45px;cursor:pointer" onclick="openNav()">&#9776;</span>      
+      </nav>
+   </c:if>
 
     <div id="wrapper">
 
@@ -172,13 +309,7 @@ function closeNav() {
             </div> -->
            
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">공지사항</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+        
             <!-- /.row -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>       
 

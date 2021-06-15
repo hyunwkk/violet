@@ -16,6 +16,9 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 이미지 자원 경로 -->
+	<resources mapping="/img/**" location="file:///c:/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -25,13 +28,23 @@
 	
 	<context:component-scan base-package="com.bteam.violet.controller" />
 	<context:component-scan base-package="com.bteam.violet.chat" />
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
 
 	<beans:bean id="AdminInterceptor" class="com.bteam.violet.interceptor.AdminInterceptor"></beans:bean>
+	<beans:bean id="CustInterceptor" class="com.bteam.violet.interceptor.CustInterceptor"></beans:bean>
 
 	<interceptors>
 	 <interceptor>
 	  <mapping path="/admin/**" />
 	  <beans:ref bean="AdminInterceptor" />
+	 </interceptor>
+	 
+	 <interceptor>
+	  <mapping path="/email/write.do" />
+	  <mapping path="/email/send.do" />
+	  <beans:ref bean="CustInterceptor" />
 	 </interceptor>
 	</interceptors>
 	
@@ -41,6 +54,5 @@
         <websocket:mapping handler="handlerChat" path="/chat" />
         <websocket:sockjs websocket-enabled="true" />
     </websocket:handlers>
-	
 	
 </beans:beans>

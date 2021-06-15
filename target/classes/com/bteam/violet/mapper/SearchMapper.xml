@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bteam.violet.mapper.SearchMapper">
+
+	<!-- 내 주변 친구 -->
+	<select id="list" resultType="com.bteam.violet.domain.CustVO">
+	select *
+	from cust_tbl c, profile_attach p
+	where c.cust_id = p.cust_id
+	</select>
+	
+
+	<!-- 검색 및 페이징 처리 -->
+	
+	<!-- 내 주변 친구 -->
+ 	<select id="arealist" resultType="com.bteam.violet.domain.CustVO">
+	select * 
+	from cust_tbl c, profile_attach p 
+	where c.cust_id = p.cust_id and c.cust_area = #{cust_area}
+	</select>
+		
+	<!-- 밥 같이 먹을 친구 -->
+	<select id="foodlist" resultType="com.bteam.violet.domain.CustVO">
+	select * 
+	from cust_tbl c, profile_attach p 
+	where c.cust_id = p.cust_id and c.cust_food = #{cust_food}
+	</select> 
+	
+	<!-- 즐겁게 운동 친구 -->
+	<select id="exerlist" resultType="com.bteam.violet.domain.CustVO">
+	select * 
+	from cust_tbl c, profile_attach p 
+	where c.cust_id = p.cust_id and c.cust_exer = #{cust_exer}
+	</select>
+	
+	<!-- 반려동물 친구 -->
+	<select id="petlist" resultType="com.bteam.violet.domain.CustVO">
+	select * 
+	from cust_tbl c, profile_attach p 
+	where c.cust_id = p.cust_id and c.cust_pet = #{cust_pet}
+	</select>
+	
+	<!-- 공부 친구 -->
+	<select id="studylist" resultType="com.bteam.violet.domain.CustVO">
+	select * 
+	from cust_tbl c, profile_attach p 
+	where c.cust_id = p.cust_id and c.cust_study = #{cust_study}
+	</select>
+ 
+ 	<!-- 프로필 친구리스트 정보보기 -->
+ 	<select id="profilelist" resultType="com.bteam.violet.domain.CustVO">
+ 	select * from cust_tbl
+ 	where cust_id= #{cust_id}
+ 	</select>
+
+ 	<!-- 프로필 개별친구 정보보기 -->
+ 	<select id="profile" resultType="com.bteam.violet.domain.CustVO">
+ 	select * from cust_tbl
+ 	where cust_id= #{cust_id}
+ 	</select>
+
+
+</mapper>
