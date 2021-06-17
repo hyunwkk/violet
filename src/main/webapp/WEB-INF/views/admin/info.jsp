@@ -29,7 +29,7 @@
 	justify-content: center;
 	text-align:center;
 	margin-top:30px;
-    margin-left: 70px;
+    margin-left: 100px;
 }
 
 .delete a:hover{

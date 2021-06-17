@@ -49,7 +49,7 @@ body {
 
 #findBtn {	
    	font-size: 14px;
-	width:50%;
+	width:100%;
 	text-align:center;
 }
 
@@ -136,8 +136,9 @@ body {
                         </form>
                         <button type="button" id="login_submit" class="btn btn-lg btn-success btn-block">login</button>
                         <div id="minicon">
-	                        <a href="/violet/cust/custfind" id="findBtn" class="btn btn-outline-success">아이디/비밀번호 찾기</a>
-	                        <a href="/violet/cust/register" id="register" class="btn btn-outline-success">회원가입</a>
+	                        <a href="/violet/cust/custfindid" id="findBtn register" class="btn btn-outline-success">아이디 찾기</a>&ensp;
+	                        <a href="/violet/cust/custfindpassword" id="findBtn register" class="btn btn-outline-success">비밀번호 찾기</a>&ensp;
+	                        <a href="/violet/cust/register" id="findBtn register" class="btn btn-outline-success">회원가입</a>
                        </div>
                         
                     </div>          

@@ -132,43 +132,45 @@ public class CustController {
 	}
 	
 	
-	// 아이디/비밀번호 찾기 페이지 get
-	@RequestMapping(value="/custfind", method = RequestMethod.GET)
-	public String custFind() throws Exception{
-		return "cust/custfind";
+	// 아이디 찾기 페이지 get
+	@RequestMapping(value = "/custfindid", method = RequestMethod.GET)
+	public String custfindid() throws Exception {
+		return "cust/custfindid";
 	}
-	
+
 	// 아이디 찾기
-	@RequestMapping(value="/getLoginId", method = RequestMethod.POST)
+	@RequestMapping(value = "/custFindId", method = RequestMethod.POST)
 	@ResponseBody
-	public String getloginId(CustVO custVO) {
+	public String custFindId(CustVO custVO) {
 		String cust_id = "";
 		try {
-			cust_id = custService.getLoginId(custVO);
+			cust_id = custService.custFindId(custVO);
 		} catch (Exception e) {
 			logger.error("아이디 찾기 오류!!!");
 			e.printStackTrace();
 		}
 		return cust_id;
 	}
-	
-	/*// 비밀번호 찾기
-	@RequestMapping(value="/getLoginPassword", method = RequestMethod.POST)
+
+	// 비밀번호 찾기 페이지 get
+	@RequestMapping(value = "/custfindpassword", method = RequestMethod.GET)
+	public String custFindPassword() throws Exception {
+		return "cust/custfindpassword";
+	}
+
+	// 비밀번호 찾기
+	@RequestMapping(value = "/custFindPassword", method = RequestMethod.POST)
 	@ResponseBody
-	public String getloginPassword(CustVO custVO) {
-		
-		CustVO cust_password = custService.getLoginPassword(custVO);
-		boolean pwdMatch = pwdEncoder.matches(custVO.getCust_password(), cust_password.getCust_password());
+	public String custFindPassword(CustVO custVO) {
 		String cust_password = "";
 		try {
-			cust_password = custService.getLoginPassword(custVO);
+			cust_password = custService.custFindPassword(custVO);
 		} catch (Exception e) {
 			logger.error("비밀번호 찾기 오류!!!");
 			e.printStackTrace();
 		}
 		return cust_password;
 	}
-*/
 	
 	
 	

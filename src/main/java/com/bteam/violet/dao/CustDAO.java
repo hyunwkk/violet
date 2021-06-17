@@ -43,10 +43,10 @@ public interface CustDAO {
 	public void custDelete(CustVO custVO)throws Exception;
 	
 	// 아이디 찾기
-	public String getLoginId(CustVO custVO) throws Exception;
-	
-	/*// 비번 찾기
-	public String getLoginPassword(CustVO custVO) throws Exception;*/
+	public String custFindId(CustVO custVO) throws Exception;
+
+	// 비번 찾기
+	public String custFindPassword(CustVO custVO) throws Exception;
 	
 	public List<CustVO> searchprofile(CustVO custVO) throws Exception;
 	
